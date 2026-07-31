@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご予約・お問い合わせ｜出張専門博多メンズエステ KAREN</title>
+<meta name="description" content="出張専門博多メンズエステ KAREN のご予約・お問い合わせフォームです。ご希望の日時・コース・セラピストをご入力の上、お気軽にご連絡ください。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">本文へスキップ</a>
+
+<!-- ============================================================
+   HEADER / GLOBAL NAV
+============================================================ -->
+<header class="site-header">
+  <div class="site-header__inner">
+
+    <a href="index.html" class="site-logo" aria-label="KAREN トップページへ">
+      <img class="site-logo__mark" src="images/logo/k-logo.png" alt="">
+      <img class="site-logo__word" src="images/logo/karen-logo.png" alt="出張専門博多メンズエステ KAREN">
+    </a>
+
+    <button class="nav-toggle" aria-controls="global-nav" aria-expanded="false">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="visually-hidden">メニューを開く</span>
+    </button>
+
+    <nav id="global-nav" class="global-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="index.html#courses-preview">コース・料金</a></li>
+        <li><a href="index.html#therapists-preview">セラピスト紹介</a></li>
+        <li><a href="index.html#area-preview">出張対応エリア</a></li>
+        <li><a href="contact.html" class="nav-cta" aria-current="page">ご予約・お問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-contact">
+      <a href="tel:0000000000" class="header-contact__tel">
+        <span class="header-contact__label">お電話でのご予約</span>
+        <span class="header-contact__number">000-0000-0000</span>
+      </a>
+      <span class="header-contact__hours">受付 10:00-24:00</span>
+    </div>
+
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+     RESERVATION FORM
+  ============================================================ -->
+  <section class="reservation" aria-labelledby="reservation-heading">
+    <h1 id="reservation-heading" class="section-title">
+      <span class="section-title__en">Reservation</span>
+      ご予約・お問い合わせ
+    </h1>
+
+    <p class="reservation__lead">
+      下記フォームに必要事項をご入力の上、送信してください。<br>
+      お急ぎの場合はお電話（<a href="tel:0000000000">000-0000-0000</a>／受付 10:00-24:00）でも承っております。
+    </p>
+
+    <!--
+      送信先: Formspree（https://formspree.io）経由で mensesthe.karen@gmail.com へ通知。
+      action の YOUR_FORM_ID を、Formspree で発行された実際のフォームIDに置き換えること。
+      送信完了後は _next で指定した自サイトの完了ページへ遷移する。
+    -->
+    <form class="reservation-form" id="reservation-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="hidden" name="_subject" value="【KAREN】ご予約・お問い合わせ">
+      <input type="hidden" name="_next" value="https://mensesthe-delivery-karen.com/thanks.html">
+
+      <div class="form-field">
+        <label for="field-name">お名前<span class="form-required">必須</span></label>
+        <input type="text" id="field-name" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-tel">電話番号<span class="form-required">必須</span></label>
+        <input type="tel" id="field-tel" name="tel" autocomplete="tel" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-email">メールアドレス<span class="form-required">必須</span></label>
+        <input type="email" id="field-email" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-date">ご希望日<span class="form-required">必須</span></label>
+        <input type="date" id="field-date" name="date" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-time">ご希望時間<span class="form-required">必須</span></label>
+        <input type="time" id="field-time" name="time" min="10:00" max="23:59" required>
+      </div>
+
+      <div class="form-field">
+        <label for="field-course">ご希望コース<span class="form-required">必須</span></label>
+        <select id="field-course" name="course" required>
+          <option value="" selected disabled>選択してください</option>
+          <option value="70分コース（¥11,000）">70分コース（¥11,000）</option>
+          <option value="100分コース（¥15,000）">100分コース（¥15,000）</option>
+          <option value="130分コース（¥19,000）">130分コース（¥19,000）</option>
+          <option value="160分コース（¥23,000）">160分コース（¥23,000）</option>
+          <option value="190分コース（¥28,000）">190分コース（¥28,000）</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="field-therapist">ご指名セラピスト<span class="form-required">必須</span></label>
+        <select id="field-therapist" name="therapist" required>
+          <option value="" selected disabled>選択してください</option>
+          <option value="えりか">えりか</option>
+          <option value="みゆ">みゆ</option>
+          <option value="さくら">さくら</option>
+          <option value="フリー（お任せ）">フリー（お任せ）</option>
+        </select>
+      </div>
+
+      <fieldset class="form-field form-fieldset">
+        <legend>当店のご利用有無<span class="form-required">必須</span></legend>
+        <div class="form-radio-group">
+          <label class="form-radio">
+            <input type="radio" name="visited" value="初めてのご利用" required>
+            初めてのご利用
+          </label>
+          <label class="form-radio">
+            <input type="radio" name="visited" value="以前にご利用いただいたことがある">
+            以前にご利用いただいたことがある
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="form-field">
+        <label for="field-message">ご連絡事項</label>
+        <textarea id="field-message" name="message" rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--primary reservation-form__submit">送信する</button>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============================================================
+   FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__brand">
+      <div class="site-footer__logo">
+        <img class="site-footer__mark" src="images/logo/k-logo.png" alt="">
+        <img class="site-footer__word" src="images/logo/karen-logo.png" alt="KAREN">
+      </div>
+      <p>出張専門博多メンズエステ KAREN</p>
+      <p>受付時間 10:00-24:00</p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="フッターナビゲーション">
+      <ul>
+        <li><a href="index.html#courses-preview">コース・料金</a></li>
+        <li><a href="index.html#therapists-preview">セラピスト紹介</a></li>
+        <li><a href="index.html#area-preview">出張対応エリア</a></li>
+        <li><a href="contact.html" aria-current="page">ご予約・お問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <nav class="site-footer__legal" aria-label="法令に関するリンク">
+      <ul>
+        <li><a href="legal/tokushoho.html">特定商取引法に基づく表記</a></li>
+        <li><a href="legal/terms.html">利用規約</a></li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <p class="site-footer__copyright">&copy; KAREN. All Rights Reserved.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
