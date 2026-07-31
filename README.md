@@ -95,10 +95,19 @@ python3 -m http.server 8000
 
 を実行し、`http://localhost:8000/` を開く。
 
-## デプロイ（予定）
+## デプロイ
 
 GitHub リポジトリの Settings → Pages で `main` ブランチのルートを Pages のソースに指定する。
-カスタムドメインを使う場合はルートに `CNAME` を追加する。
+カスタムドメインは `mensesthe-delivery-karen.com`（ルートの `CNAME` ファイルで設定済み）。
+ドメイン側のDNSに以下のAレコードを設定し、GitHub側の Settings → Pages で
+「Enforce HTTPS」を有効化すること。
+
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
 
 ## 今後の進め方
 

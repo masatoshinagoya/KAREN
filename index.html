@@ -26,7 +26,7 @@
 <!-- ============================================================
    HEADER / GLOBAL NAV
 ============================================================ -->
-<header class="site-header">
+<header class="site-header" id="top">
   <div class="site-header__inner">
 
     <a href="index.html" class="site-logo" aria-label="KAREN トップページへ">
@@ -43,10 +43,10 @@
 
     <nav id="global-nav" class="global-nav" aria-label="グローバルナビゲーション">
       <ul>
-        <li><a href="index.html" aria-current="page">トップ</a></li>
-        <li><a href="courses.html">コース・料金</a></li>
-        <li><a href="therapists.html">セラピスト紹介</a></li>
-        <li><a href="area.html">出張対応エリア</a></li>
+        <li><a href="#top" aria-current="page">トップ</a></li>
+        <li><a href="#courses-preview">コース・料金</a></li>
+        <li><a href="#therapists-preview">セラピスト紹介</a></li>
+        <li><a href="#area-preview">出張対応エリア</a></li>
         <li><a href="contact.html" class="nav-cta">ご予約・お問い合わせ</a></li>
       </ul>
     </nav>
@@ -113,7 +113,7 @@
   <!-- ============================================================
      COURSES PREVIEW
   ============================================================ -->
-  <section class="courses-preview" aria-labelledby="courses-heading">
+  <section class="courses-preview" id="courses-preview" aria-labelledby="courses-heading">
     <h2 id="courses-heading" class="section-title">
       <span class="section-title__en">Courses</span>
       コース・料金
@@ -159,14 +159,12 @@
         <li><span>交通費</span><span>1,000円</span><span>〜</span></li>
       </ul>
     </div>
-
-    <a href="courses.html" class="btn btn--outline btn--more">コース・料金一覧を見る</a>
   </section>
 
   <!-- ============================================================
      THERAPISTS PREVIEW（身体スペック等は掲載しない）
   ============================================================ -->
-  <section class="therapists-preview" aria-labelledby="therapists-heading">
+  <section class="therapists-preview" id="therapists-preview" aria-labelledby="therapists-heading">
     <h2 id="therapists-heading" class="section-title">
       <span class="section-title__en">Therapist</span>
       セラピスト紹介
@@ -256,8 +254,6 @@
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
-
-    <a href="therapists.html" class="btn btn--outline btn--more">セラピスト一覧を見る</a>
   </section>
 
   <!-- ============================================================
@@ -294,13 +290,12 @@
   <!-- ============================================================
      AREA / 出張対応エリア（概要）
   ============================================================ -->
-  <section class="area-preview" aria-labelledby="area-heading">
+  <section class="area-preview" id="area-preview" aria-labelledby="area-heading">
     <h2 id="area-heading" class="section-title">
       <span class="section-title__en">Service Area</span>
       出張対応エリア
     </h2>
-    <p class="area-preview__lead">福岡市内中心部（博多区・中央区 ほか）へ出張対応いたします。</p>
-    <a href="area.html" class="btn btn--outline btn--more">対応エリア詳細を見る</a>
+    <p class="area-preview__lead">福岡市内中心部（博多区・中央区 ほか）メインに福岡市全域へ出張対応いたします。</p>
   </section>
 
   <!-- ============================================================
@@ -343,16 +338,15 @@
         <img class="site-footer__mark" src="images/logo/k-logo.png" alt="">
         <img class="site-footer__word" src="images/logo/karen-logo.png" alt="KAREN">
       </div>
-      <p>（仮）出張専門博多メンズエステ KAREN</p>
-      <p>福岡市博多を中心とした福岡市内中心部 出張対応</p>
+      <p>出張専門博多メンズエステ KAREN</p>
       <p>受付時間 10:00-24:00</p>
     </div>
 
     <nav class="site-footer__nav" aria-label="フッターナビゲーション">
       <ul>
-        <li><a href="courses.html">コース・料金</a></li>
-        <li><a href="therapists.html">セラピスト紹介</a></li>
-        <li><a href="area.html">出張対応エリア</a></li>
+        <li><a href="#courses-preview">コース・料金</a></li>
+        <li><a href="#therapists-preview">セラピスト紹介</a></li>
+        <li><a href="#area-preview">出張対応エリア</a></li>
         <li><a href="contact.html">ご予約・お問い合わせ</a></li>
       </ul>
     </nav>
