@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2c2622"/>
+      <stop offset="55%" stop-color="#6a4550"/>
+      <stop offset="100%" stop-color="#b6975f"/>
+    </linearGradient>
+    <pattern id="wave2" width="60" height="30" patternUnits="userSpaceOnUse">
+      <path d="M0 15 Q15 0 30 15 T60 15" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g2)"/>
+  <rect width="1600" height="900" fill="url(#wave2)"/>
+  <text x="1560" y="870" text-anchor="end" font-family="Shippori Mincho, serif" font-size="20" fill="#ffffff" fill-opacity="0.35">Photo Placeholder 02</text>
+</svg>

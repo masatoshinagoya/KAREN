@@ -1,0 +1,819 @@
+/* ===================================================================
+   KAREN — Base Styles
+   Design tokens: 白ベース × ローズピンク × 明朝体（コーポレート明朝 ver2）
+   =================================================================== */
+
+:root{
+  /* --- color --- */
+  --color-paper:      #fbf8f6;   /* ページ背景（オフホワイト） */
+  --color-surface:    #ffffff;   /* カード等の面 */
+  --color-ink:        #2c2622;   /* 本文色（温かみのある黒） */
+  --color-ink-soft:   #726a63;   /* 補足テキスト */
+  --color-rose:       #e0668a;   /* メインアクセント（ロゴ・見出し） */
+  --color-rose-deep:  #c94b71;   /* ホバー・強調 */
+  --color-rose-pale:  #fbe3ea;   /* 淡いピンク面 */
+  --color-line:        #e8ded9;   /* 罫線 */
+  --color-gold:        #b6975f;   /* 和の差し色（細線のみに使用） */
+
+  /* --- type --- */
+  --font-serif: "コーポレート明朝 ver2", "Corporate Mincho ver2",
+                "Shippori Mincho", "Noto Serif JP", "Hiragino Mincho ProN",
+                "Yu Mincho", serif;
+
+  /* --- layout --- */
+  --content-width: 1120px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --radius: 2px;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --color-paper:     #201c1a;
+    --color-surface:   #2a2422;
+    --color-ink:        #f1ece7;
+    --color-ink-soft:   #b8ada4;
+    --color-rose:        #f299b3;
+    --color-rose-deep:   #ffb0c4;
+    --color-rose-pale:   #44272e;
+    --color-line:         #453d38;
+    --color-gold:          #cbaf7c;
+  }
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+img{ max-width: 100%; display: block; }
+ul, ol, dl{ margin: 0; padding: 0; list-style: none; }
+a{ color: inherit; text-decoration: none; }
+h1, h2, h3{ margin: 0; font-weight: 600; text-wrap: balance; }
+p{ margin: 0; }
+
+.visually-hidden{
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.skip-link{
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-rose);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+}
+.skip-link:focus{ left: 8px; top: 8px; }
+
+:focus-visible{
+  outline: 2px solid var(--color-rose);
+  outline-offset: 2px;
+}
+
+/* ===================================================================
+   Buttons
+   =================================================================== */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  padding: .95em 2.2em;
+  border: 1px solid var(--color-rose);
+  border-radius: var(--radius);
+  font-family: var(--font-serif);
+  font-size: 1.425rem;
+  letter-spacing: .04em;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.btn--primary{
+  background: var(--color-rose);
+  color: #fff;
+}
+.btn--primary:hover{
+  background: var(--color-rose-deep);
+  border-color: var(--color-rose-deep);
+}
+.btn--outline{
+  background: transparent;
+  color: var(--color-rose-deep);
+}
+.btn--outline:hover{
+  background: var(--color-rose-pale);
+}
+.btn--more{ margin: 32px auto 0; }
+
+/* ===================================================================
+   Section title（英字の小見出し + 金の細線 + 明朝見出し）
+   =================================================================== */
+.section-title{
+  position: relative;
+  text-align: center;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  letter-spacing: .06em;
+  margin: 0 0 48px;
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("../images/decoration/flower-rose.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 240px auto;
+  opacity: .35;
+}
+.section-title__en{
+  font-family: "Shippori Mincho", serif;
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+.section-title::after{
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-top: 4px;
+}
+
+section{
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 88px var(--gutter);
+}
+
+/* ===================================================================
+   Header
+   =================================================================== */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 248, 246, .92);
+  backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: 1px solid var(--color-line);
+}
+@media (prefers-color-scheme: dark){
+  .site-header{ background: rgba(32, 28, 26, .92); }
+}
+.site-header__inner{
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-logo{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.site-logo__mark{ height: 60px; width: auto; }
+.site-logo__word{ height: 48px; width: auto; }
+
+.header-contact{
+  margin-left: auto;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-size: .78rem;
+  color: var(--color-ink-soft);
+}
+.header-contact__tel{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--color-rose-deep);
+}
+.header-contact__number{
+  font-size: 1.15rem;
+  letter-spacing: .03em;
+}
+
+.global-nav ul{
+  display: flex;
+  gap: 28px;
+  font-size: .9rem;
+  letter-spacing: .03em;
+}
+.global-nav a{ padding: 6px 0; border-bottom: 1px solid transparent; }
+.global-nav a:hover,
+.global-nav a[aria-current="page"]{ border-color: var(--color-rose); }
+.global-nav .nav-cta{
+  background: var(--color-rose);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+}
+.global-nav .nav-cta:hover{ background: var(--color-rose-deep); border-color: transparent; }
+
+.nav-toggle{
+  margin-left: auto;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px; height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle__bar{
+  width: 100%; height: 1px;
+  background: var(--color-ink);
+}
+
+@media (min-width: 860px){
+  .nav-toggle{ display: none; }
+  .header-contact{ display: flex; }
+  .global-nav{ margin-left: auto; }
+}
+
+@media (max-width: 859px){
+  .global-nav{
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+  }
+  .global-nav[data-open="true"]{ max-height: 480px; }
+  .global-nav ul{
+    flex-direction: column;
+    gap: 0;
+    padding: 8px var(--gutter) 20px;
+  }
+  .global-nav a{ display: block; padding: 12px 0; }
+  .global-nav .nav-cta{ margin-top: 8px; text-align: center; }
+}
+
+/* ===================================================================
+   Hero（フェード切り替え / 2枚 / インジケーター無し）
+   =================================================================== */
+.hero{
+  position: relative;
+  max-width: none;
+  padding: 0;
+}
+.hero__slides{
+  position: relative;
+  height: min(88vh, 720px);
+  min-height: 460px;
+  overflow: hidden;
+}
+.hero__slide{
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero__slide.is-active{ opacity: 1; }
+.hero__slide img{
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+.hero__copy{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--gutter);
+  color: #fff;
+}
+.hero__eyebrow{
+  font-family: "Shippori Mincho", serif;
+  letter-spacing: .3em;
+  font-size: 1.08rem;
+  text-transform: uppercase;
+  color: var(--color-rose-pale);
+  margin-bottom: 18px;
+}
+.hero__copy h1{
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.7;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 18px rgba(0,0,0,.25);
+}
+.hero__lead{
+  max-width: 46ch;
+  font-size: 1.425rem;
+  line-height: 2;
+  color: rgba(255,255,255,.92);
+}
+.hero__cta{
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  z-index: 2;
+}
+.hero__cta .btn--outline{
+  color: #fff;
+  border-color: rgba(255,255,255,.75);
+  background: rgba(44,38,34,.25);
+}
+.hero__cta .btn--outline:hover{ background: rgba(44,38,34,.45); }
+
+@media (max-width: 640px){
+  .hero__cta{ flex-direction: column; width: calc(100% - 40px); bottom: 20px; }
+}
+
+/* ===================================================================
+   Strengths
+   =================================================================== */
+.strengths__list{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 32px;
+}
+.strengths__item{ text-align: center; }
+.strengths__icon{
+  width: 40px; height: 40px;
+  margin: 0 auto 18px;
+}
+.strengths__item h3{
+  font-size: 1.02rem;
+  margin-bottom: 10px;
+  letter-spacing: .02em;
+}
+.strengths__item p{
+  font-size: 1.29rem;
+  color: var(--color-ink-soft);
+  line-height: 1.9;
+}
+
+@media (min-width: 860px){
+  .strengths__list{ grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===================================================================
+   Courses preview
+   =================================================================== */
+.courses-preview{ text-align: center; }
+.courses-preview__lead{ font-size: 1.5rem; }
+.courses-preview__list{
+  display: grid;
+  gap: 20px;
+}
+.course-card{
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+}
+.course-card h3{ font-size: 1rem; margin-bottom: 14px; }
+.course-card__time{
+  color: var(--color-ink-soft);
+  font-size: 1.23rem;
+  margin-bottom: 8px;
+}
+.course-card__price{
+  color: var(--color-rose-deep);
+  font-size: 1.95rem;
+  letter-spacing: .04em;
+}
+
+@media (min-width: 640px){
+  .courses-preview__list{ grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 900px){
+  .courses-preview__list{ grid-template-columns: repeat(5, 1fr); }
+}
+
+.options-preview{
+  max-width: 480px;
+  margin: 36px auto 0;
+  text-align: left;
+}
+.options-preview__title{
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.options-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  column-gap: 4px;
+  border-top: 1px solid var(--color-line);
+}
+.options-list li{ display: contents; }
+.options-list li > span{
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: .92rem;
+}
+.options-list li > span:nth-child(2){
+  color: var(--color-rose-deep);
+  white-space: nowrap;
+  font-size: 1.5em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.options-list li > span:nth-child(3){
+  color: var(--color-rose-deep);
+  white-space: nowrap;
+  font-size: 1.5em;
+  text-align: left;
+  padding-left: 0;
+}
+.options-list li.options-list__note > span{
+  grid-column: 1 / -1;
+  text-align: left;
+  white-space: normal;
+  font-size: 1.08rem;
+  color: var(--color-ink-soft);
+  padding: 0 4px 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* ===================================================================
+   Therapists preview
+   =================================================================== */
+.therapists-preview{ text-align: center; }
+
+.therapists-slider{
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.therapists-preview__list{
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 4px 12px;
+  margin: 0;
+  scrollbar-width: none;
+}
+.therapists-preview__list::-webkit-scrollbar{ display: none; }
+.therapist-card{
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.therapist-photo{
+  position: relative;
+  width: 100%; max-width: 480px;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+.therapist-photo__track{
+  display: flex;
+  aspect-ratio: 480 / 640;
+  transition: transform .35s ease;
+}
+.therapist-photo__slide{
+  flex: 0 0 100%;
+}
+.therapist-photo__slide img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.therapist-photo__nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(44,38,34,.35);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.therapist-photo__nav:hover{ background: rgba(44,38,34,.55); }
+.therapist-photo__nav--prev{ left: 8px; }
+.therapist-photo__nav--next{ right: 8px; }
+.therapist-photo__dots{
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.therapist-photo__dots button{
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: rgba(255,255,255,.4);
+  padding: 0;
+  cursor: pointer;
+}
+.therapist-photo__dots button.is-active{ background: #fff; }
+.therapist-card h3{ font-size: 1.05rem; margin-bottom: 6px; }
+.therapist-card__profile{
+  font-size: 1.17rem;
+  color: var(--color-ink-soft);
+  letter-spacing: .02em;
+  margin-bottom: 6px;
+}
+.therapist-card__meta{
+  font-size: 1.17rem;
+  color: var(--color-gold);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.therapist-card__comment{
+  font-size: 1.275rem;
+  color: var(--color-ink-soft);
+  max-width: 26ch;
+  margin: 0 auto;
+  line-height: 1.9;
+}
+
+.therapists-slider__nav{
+  position: absolute;
+  top: 64px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-rose-deep);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.therapists-slider__nav:hover{
+  background: var(--color-rose-pale);
+  border-color: var(--color-rose-deep);
+}
+.therapists-slider__nav:disabled{
+  opacity: .35;
+  cursor: default;
+  pointer-events: none;
+}
+.therapists-slider__nav--prev{ left: -4px; }
+.therapists-slider__nav--next{ right: -4px; }
+
+@media (min-width: 640px){
+  .therapist-card{ flex-basis: calc(50% - 14px); }
+}
+
+@media (min-width: 900px){
+  .therapist-card{ flex-basis: calc(33.333% - 19px); }
+  .therapists-slider__nav--prev{ left: -20px; }
+  .therapists-slider__nav--next{ right: -20px; }
+}
+
+/* ===================================================================
+   Schedule（本日の出勤情報）
+   =================================================================== */
+.schedule{ text-align: center; }
+.schedule__date{
+  font-size: 1.275rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 24px;
+  letter-spacing: .02em;
+}
+.schedule__table-wrap{
+  max-width: 920px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+.schedule-table{
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+.schedule-table th,
+.schedule-table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 1.275rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.schedule-table thead th{
+  background: var(--color-rose-pale);
+  font-size: 1.14rem;
+  letter-spacing: .04em;
+  color: var(--color-ink-soft);
+}
+.schedule-table tbody th{
+  font-weight: 600;
+  text-align: left;
+}
+.schedule-table tbody td{ color: var(--color-rose-deep); }
+.schedule-table tbody tr:last-child th,
+.schedule-table tbody tr:last-child td{ border-bottom: none; }
+.schedule-table td.is-off{ color: var(--color-ink-soft); }
+.schedule-table th:first-child,
+.schedule-table tbody th{
+  position: sticky;
+  left: 0;
+  background: var(--color-surface);
+  text-align: left;
+}
+.schedule-table thead th:first-child{ background: var(--color-rose-pale); }
+.schedule-table th.is-today,
+.schedule-table td.is-today{
+  background: var(--color-rose-pale);
+  font-weight: 700;
+}
+.schedule-table tbody th.is-today{ background: var(--color-rose-pale); }
+.schedule__note{
+  margin-top: 20px;
+  font-size: 1.17rem;
+  color: var(--color-ink-soft);
+}
+
+/* ===================================================================
+   Area preview
+   =================================================================== */
+.area-preview{ text-align: center; }
+.area-preview__lead{
+  color: var(--color-ink-soft);
+  font-size: 1.425rem;
+  margin-bottom: 8px;
+}
+
+/* ===================================================================
+   Flow
+   =================================================================== */
+.flow{ background: var(--color-rose-pale); max-width: none; }
+.flow > *{ max-width: var(--content-width); margin: 0 auto; }
+.flow__list{
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
+  counter-reset: flow;
+}
+.flow__list li{
+  text-align: center;
+  position: relative;
+  padding-top: 8px;
+}
+.flow__list li::before{
+  counter-increment: flow;
+  content: counter(flow);
+  display: block;
+  width: 34px; height: 34px;
+  margin: 0 auto 16px;
+  border: 1px solid var(--color-rose);
+  border-radius: 50%;
+  color: var(--color-rose-deep);
+  font-family: "Shippori Mincho", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow__list h3{ font-size: 1rem; margin-bottom: 8px; }
+.flow__list p{ font-size: 1.275rem; color: var(--color-ink-soft); }
+
+@media (min-width: 760px){
+  .flow__list{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===================================================================
+   FAQ preview
+   =================================================================== */
+.faq-preview{ text-align: center; }
+.faq-preview__list{
+  text-align: left;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.faq-item{
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 18px;
+}
+.faq-item dt{
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.faq-item dt::before{ content: "Q. "; color: var(--color-rose); }
+.faq-item dd{
+  color: var(--color-ink-soft);
+  font-size: 1.35rem;
+  margin: 0;
+}
+.faq-item dd::before{ content: "A. "; color: var(--color-gold); }
+
+/* ===================================================================
+   Final CTA
+   =================================================================== */
+.final-cta{
+  max-width: none;
+  text-align: center;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 72px var(--gutter);
+}
+.final-cta h2{
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.final-cta p{
+  color: rgba(255,255,255,.75);
+  font-size: 1.5rem;
+  margin-bottom: 28px;
+}
+.final-cta__buttons{
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.final-cta .btn--outline{
+  color: #fff;
+  border-color: rgba(255,255,255,.6);
+}
+.final-cta .btn--outline:hover{ background: rgba(255,255,255,.1); }
+
+/* ===================================================================
+   Footer
+   =================================================================== */
+.site-footer{
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-line);
+  padding: 56px var(--gutter) 24px;
+}
+.site-footer__inner{
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
+}
+.site-footer__logo{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.site-footer__mark{ height: 30px; width: auto; }
+.site-footer__word{ height: 24px; width: auto; }
+.site-footer__brand p{
+  font-size: 1.23rem;
+  color: var(--color-ink-soft);
+  line-height: 1.8;
+}
+.site-footer__nav ul,
+.site-footer__legal ul{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: .85rem;
+}
+.site-footer__nav a:hover,
+.site-footer__legal a:hover{ color: var(--color-rose-deep); }
+.site-footer__copyright{
+  text-align: center;
+  font-size: 1.11rem;
+  color: var(--color-ink-soft);
+  margin-top: 40px;
+}
+
+@media (min-width: 760px){
+  .site-footer__inner{ grid-template-columns: 2fr 1fr 1fr; }
+}
