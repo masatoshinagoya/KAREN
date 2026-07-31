@@ -467,6 +467,25 @@ section{
   border-bottom: 1px solid var(--color-line);
 }
 
+.notice-box{
+  max-width: 720px;
+  margin: 40px auto 0;
+  padding: 24px;
+  border: 1px solid var(--color-line);
+  text-align: left;
+}
+.notice-box__title{
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 0 12px;
+}
+.notice-box__text{
+  font-size: .85rem;
+  line-height: 1.9;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
 /* ===================================================================
    Therapists preview
    =================================================================== */
@@ -776,6 +795,108 @@ section{
   border-color: rgba(255,255,255,.6);
 }
 .final-cta .btn--outline:hover{ background: rgba(255,255,255,.1); }
+
+/* ===================================================================
+   Reservation form
+   =================================================================== */
+.reservation{ text-align: center; }
+.reservation__lead{
+  max-width: 640px;
+  margin: 0 auto 48px;
+  color: var(--color-ink-soft);
+  font-size: 1.35rem;
+}
+.reservation__lead a{ color: var(--color-rose-deep); }
+.reservation__lead a:hover{ text-decoration: underline; }
+
+.reservation-form{
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.form-field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-field label,
+.form-fieldset legend{
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.form-required{
+  margin-left: .6em;
+  padding: .15em .6em;
+  border-radius: var(--radius);
+  background: var(--color-rose-pale);
+  color: var(--color-rose-deep);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  vertical-align: middle;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width: 100%;
+  padding: .8em 1em;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 1.2rem;
+}
+.form-field textarea{ resize: vertical; }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  outline: 2px solid var(--color-rose);
+  outline-offset: 1px;
+}
+.form-fieldset{
+  padding: 0;
+  border: 0;
+}
+.form-fieldset legend{ padding: 0; margin-bottom: 8px; }
+.form-radio-group{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-radio{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.form-radio input{ width: auto; }
+
+.reservation-form__submit{
+  align-self: center;
+  min-width: 220px;
+}
+
+/* ===================================================================
+   Thanks（送信完了）
+   =================================================================== */
+.thanks{ text-align: center; }
+.thanks__lead{
+  max-width: 640px;
+  margin: 0 auto 40px;
+  color: var(--color-ink-soft);
+  font-size: 1.35rem;
+}
+.thanks__lead a{ color: var(--color-rose-deep); }
+.thanks__lead a:hover{ text-decoration: underline; }
+.thanks__buttons{
+  display: flex;
+  justify-content: center;
+}
 
 /* ===================================================================
    Footer
