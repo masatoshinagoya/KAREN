@@ -309,7 +309,7 @@ section{
 }
 .hero__img--sp{ display: none; }
 
-@media (max-width: 640px){
+@media (max-width: 640px) and (orientation: portrait){
   .hero__slides{ height: auto; min-height: 0; aspect-ratio: 853 / 1844; }
   .hero__img--pc{ display: none; }
   .hero__img--sp{ display: block; }
