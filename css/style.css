@@ -4,6 +4,9 @@
    =================================================================== */
 
 :root{
+  /* 項目名（オプション表）以外のHP全体の文字を0.8倍に縮小 */
+  font-size: 80%;
+
   /* --- color --- */
   --color-paper:      #fbf8f6;   /* ページ背景（オフホワイト） */
   --color-surface:    #ffffff;   /* カード等の面 */
@@ -304,6 +307,13 @@ section{
   width: 100%; height: 100%;
   object-fit: contain;
 }
+.hero__img--sp{ display: none; }
+
+@media (max-width: 640px){
+  .hero__slides{ height: auto; min-height: 0; aspect-ratio: 853 / 1844; }
+  .hero__img--pc{ display: none; }
+  .hero__img--sp{ display: block; }
+}
 .hero__copy{
   position: absolute;
   inset: 0;
@@ -331,7 +341,7 @@ section{
 }
 .hero__lead{
   max-width: 46ch;
-  font-size: 1.425rem;
+  font-size: 1.14rem;
   line-height: 2;
   color: rgba(255,255,255,.92);
 }
@@ -374,7 +384,7 @@ section{
   letter-spacing: .02em;
 }
 .strengths__item p{
-  font-size: 1.29rem;
+  font-size: 1.032rem;
   color: var(--color-ink-soft);
   line-height: 1.9;
 }
@@ -387,7 +397,7 @@ section{
    Courses preview
    =================================================================== */
 .courses-preview{ text-align: center; }
-.courses-preview__lead{ font-size: 1.5rem; }
+.courses-preview__lead{ font-size: 1.2rem; }
 .courses-preview__list{
   display: grid;
   gap: 20px;
@@ -401,12 +411,12 @@ section{
 .course-card h3{ font-size: 1rem; margin-bottom: 14px; }
 .course-card__time{
   color: var(--color-ink-soft);
-  font-size: 1.23rem;
+  font-size: .984rem;
   margin-bottom: 8px;
 }
 .course-card__price{
   color: var(--color-rose-deep);
-  font-size: 1.95rem;
+  font-size: 1.56rem;
   letter-spacing: .04em;
 }
 
@@ -443,17 +453,21 @@ section{
   border-bottom: 1px solid var(--color-line);
   font-size: .92rem;
 }
+/* 項目名は0.8倍縮小の対象外（元のサイズを維持） */
+.options-list li:not(.options-list__note) > span:first-child{
+  font-size: 1.15rem;
+}
 .options-list li > span:nth-child(2){
   color: var(--color-rose-deep);
   white-space: nowrap;
-  font-size: 1.5em;
+  font-size: 1.2em;
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 .options-list li > span:nth-child(3){
   color: var(--color-rose-deep);
   white-space: nowrap;
-  font-size: 1.5em;
+  font-size: 1.2em;
   text-align: left;
   padding-left: 0;
 }
@@ -461,7 +475,7 @@ section{
   grid-column: 1 / -1;
   text-align: left;
   white-space: normal;
-  font-size: 1.08rem;
+  font-size: .864rem;
   color: var(--color-ink-soft);
   padding: 0 4px 12px;
   border-bottom: 1px solid var(--color-line);
@@ -480,7 +494,7 @@ section{
   margin: 0 0 12px;
 }
 .notice-box__text{
-  font-size: .85rem;
+  font-size: .68rem;
   line-height: 1.9;
   color: var(--color-ink-soft);
   margin: 0;
@@ -569,19 +583,19 @@ section{
 .therapist-photo__dots button.is-active{ background: #fff; }
 .therapist-card h3{ font-size: 1.05rem; margin-bottom: 6px; }
 .therapist-card__profile{
-  font-size: 1.17rem;
+  font-size: .936rem;
   color: var(--color-ink-soft);
   letter-spacing: .02em;
   margin-bottom: 6px;
 }
 .therapist-card__meta{
-  font-size: 1.17rem;
+  font-size: .936rem;
   color: var(--color-gold);
   letter-spacing: .04em;
   margin-bottom: 8px;
 }
 .therapist-card__comment{
-  font-size: 1.275rem;
+  font-size: 1.02rem;
   color: var(--color-ink-soft);
   max-width: 26ch;
   margin: 0 auto;
@@ -615,6 +629,15 @@ section{
 .therapists-slider__nav--prev{ left: -4px; }
 .therapists-slider__nav--next{ right: -4px; }
 
+@media (max-width: 639px){
+  .therapist-card{ flex-basis: 68%; }
+  .therapist-photo{ max-width: 260px; margin-bottom: 12px; }
+  .therapist-card h3{ font-size: .95rem; }
+  .therapist-card__profile,
+  .therapist-card__meta{ font-size: .82rem; }
+  .therapist-card__comment{ font-size: .88rem; line-height: 1.7; }
+}
+
 @media (min-width: 640px){
   .therapist-card{ flex-basis: calc(50% - 14px); }
 }
@@ -630,7 +653,7 @@ section{
    =================================================================== */
 .schedule{ text-align: center; }
 .schedule__date{
-  font-size: 1.275rem;
+  font-size: 1.02rem;
   color: var(--color-ink-soft);
   margin-bottom: 24px;
   letter-spacing: .02em;
@@ -655,6 +678,7 @@ section{
   text-align: center;
   white-space: nowrap;
 }
+.schedule-table tbody td{ font-size: 1.02rem; }
 .schedule-table thead th{
   background: var(--color-rose-pale);
   font-size: 1.14rem;
@@ -685,7 +709,7 @@ section{
 .schedule-table tbody th.is-today{ background: var(--color-rose-pale); }
 .schedule__note{
   margin-top: 20px;
-  font-size: 1.17rem;
+  font-size: .936rem;
   color: var(--color-ink-soft);
 }
 
@@ -695,7 +719,7 @@ section{
 .area-preview{ text-align: center; }
 .area-preview__lead{
   color: var(--color-ink-soft);
-  font-size: 1.425rem;
+  font-size: 1.14rem;
   margin-bottom: 8px;
 }
 
@@ -731,7 +755,7 @@ section{
   justify-content: center;
 }
 .flow__list h3{ font-size: 1rem; margin-bottom: 8px; }
-.flow__list p{ font-size: 1.275rem; color: var(--color-ink-soft); }
+.flow__list p{ font-size: 1.02rem; color: var(--color-ink-soft); }
 
 @media (min-width: 760px){
   .flow__list{ grid-template-columns: repeat(3, 1fr); }
@@ -760,7 +784,7 @@ section{
 .faq-item dt::before{ content: "Q. "; color: var(--color-rose); }
 .faq-item dd{
   color: var(--color-ink-soft);
-  font-size: 1.35rem;
+  font-size: 1.08rem;
   margin: 0;
 }
 .faq-item dd::before{ content: "A. "; color: var(--color-gold); }
@@ -781,7 +805,7 @@ section{
 }
 .final-cta p{
   color: rgba(255,255,255,.75);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 28px;
 }
 .final-cta__buttons{
@@ -804,7 +828,7 @@ section{
   max-width: 640px;
   margin: 0 auto 48px;
   color: var(--color-ink-soft);
-  font-size: 1.35rem;
+  font-size: 1.08rem;
 }
 .reservation__lead a{ color: var(--color-rose-deep); }
 .reservation__lead a:hover{ text-decoration: underline; }
@@ -871,7 +895,7 @@ section{
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.2rem;
+  font-size: .96rem;
   font-weight: 400;
 }
 .form-radio input{ width: auto; }
@@ -889,7 +913,7 @@ section{
   max-width: 640px;
   margin: 0 auto 40px;
   color: var(--color-ink-soft);
-  font-size: 1.35rem;
+  font-size: 1.08rem;
 }
 .thanks__lead a{ color: var(--color-rose-deep); }
 .thanks__lead a:hover{ text-decoration: underline; }
@@ -921,7 +945,7 @@ section{
 .site-footer__mark{ height: 30px; width: auto; }
 .site-footer__word{ height: 24px; width: auto; }
 .site-footer__brand p{
-  font-size: 1.23rem;
+  font-size: .984rem;
   color: var(--color-ink-soft);
   line-height: 1.8;
 }
@@ -936,7 +960,7 @@ section{
 .site-footer__legal a:hover{ color: var(--color-rose-deep); }
 .site-footer__copyright{
   text-align: center;
-  font-size: 1.11rem;
+  font-size: .888rem;
   color: var(--color-ink-soft);
   margin-top: 40px;
 }
