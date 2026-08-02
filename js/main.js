@@ -28,32 +28,6 @@
     }, INTERVAL_MS);
   }
 
-  /* --- セラピスト紹介 横スクロールカルーセル --- */
-  var sliderTrack = document.querySelector("[data-slider-track]");
-  var sliderPrev = document.querySelector("[data-slider-prev]");
-  var sliderNext = document.querySelector("[data-slider-next]");
-
-  if (sliderTrack && sliderPrev && sliderNext) {
-    var scrollByCard = function (direction) {
-      var card = sliderTrack.querySelector(".therapist-card");
-      if (!card) return;
-      var gap = parseFloat(getComputedStyle(sliderTrack).columnGap || 0);
-      sliderTrack.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: "smooth" });
-    };
-
-    var updateSliderNav = function () {
-      var maxScroll = sliderTrack.scrollWidth - sliderTrack.clientWidth - 1;
-      sliderPrev.disabled = sliderTrack.scrollLeft <= 0;
-      sliderNext.disabled = sliderTrack.scrollLeft >= maxScroll;
-    };
-
-    sliderPrev.addEventListener("click", function () { scrollByCard(-1); });
-    sliderNext.addEventListener("click", function () { scrollByCard(1); });
-    sliderTrack.addEventListener("scroll", updateSliderNav);
-    window.addEventListener("resize", updateSliderNav);
-    updateSliderNav();
-  }
-
   /* --- セラピストカード内 写真スライダー（1人3枚） --- */
   document.querySelectorAll("[data-photo-slider]").forEach(function (slider) {
     var track = slider.querySelector(".therapist-photo__track");
@@ -83,10 +57,9 @@
   });
 
   /* --- 今週の出勤情報 ---
-     weekStart: この表の基準となる月曜日の日付（YYYY-MM-DD）。
-     週が変わったら weekStart と各セラピストの days（月曜始まり7件）を書き換える。
-     休みの日は "off" を指定する。 */
-  var weekStart = "2026-07-27";
+     各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
+     表示する週（月曜日の日付）は今日の日付から自動計算されるため、
+     日付が変わっても手動で書き換える必要はなく、週が進むと自動的に表示も進む。 */
   var weekSchedule = [
     { name: "えりか", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
     { name: "みゆ",   days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
@@ -99,9 +72,13 @@
 
   if (scheduleHeadRow && scheduleBody) {
     var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
-    var start = new Date(weekStart + "T00:00:00");
     var today = new Date();
     today.setHours(0, 0, 0, 0);
+
+    // 今日を含む週の月曜日を求める（日曜=0なので6日前、それ以外は月曜からの日数分戻る）
+    var mondayOffset = today.getDay() === 0 ? -6 : 1 - today.getDay();
+    var start = new Date(today);
+    start.setDate(today.getDate() + mondayOffset);
 
     var dates = [];
     for (var i = 0; i < 7; i++) {

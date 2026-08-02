@@ -505,27 +505,21 @@ section{
    =================================================================== */
 .therapists-preview{ text-align: center; }
 
-.therapists-slider{
-  position: relative;
+.therapists-grid{
   max-width: 1040px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 .therapists-preview__list{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   padding: 4px 4px 12px;
   margin: 0;
-  scrollbar-width: none;
+  list-style: none;
 }
-.therapists-preview__list::-webkit-scrollbar{ display: none; }
 .therapist-card{
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+  text-align: center;
 }
 .therapist-photo{
   position: relative;
@@ -602,50 +596,17 @@ section{
   line-height: 1.9;
 }
 
-.therapists-slider__nav{
-  position: absolute;
-  top: 64px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--color-line);
-  background: var(--color-surface);
-  color: var(--color-rose-deep);
-  cursor: pointer;
-  transition: background .2s ease, border-color .2s ease;
-}
-.therapists-slider__nav:hover{
-  background: var(--color-rose-pale);
-  border-color: var(--color-rose-deep);
-}
-.therapists-slider__nav:disabled{
-  opacity: .35;
-  cursor: default;
-  pointer-events: none;
-}
-.therapists-slider__nav--prev{ left: -4px; }
-.therapists-slider__nav--next{ right: -4px; }
-
 @media (max-width: 639px){
-  .therapist-card{ flex-basis: 68%; }
-  .therapist-photo{ max-width: 260px; margin-bottom: 12px; }
+  .therapists-preview__list{ gap: 16px 14px; }
+  .therapist-photo{ max-width: 100%; margin-bottom: 12px; }
   .therapist-card h3{ font-size: .95rem; }
   .therapist-card__profile,
   .therapist-card__meta{ font-size: .82rem; }
-  .therapist-card__comment{ font-size: .88rem; line-height: 1.7; }
-}
-
-@media (min-width: 640px){
-  .therapist-card{ flex-basis: calc(50% - 14px); }
+  .therapist-card__comment{ font-size: .88rem; line-height: 1.7; max-width: none; }
 }
 
 @media (min-width: 900px){
-  .therapist-card{ flex-basis: calc(33.333% - 19px); }
-  .therapists-slider__nav--prev{ left: -20px; }
-  .therapists-slider__nav--next{ right: -20px; }
+  .therapists-preview__list{ grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ===================================================================
