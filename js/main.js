@@ -58,9 +58,8 @@
 
   /* --- 今週の出勤情報 ---
      各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
-     表示する週（月曜日の日付）は今日の日付から自動計算されるため、
-     日付が変わっても手動で書き換える必要はなく、週が進むと自動的に表示も進む。
-     列の並び順は今日の日付が一番先頭に来るよう、月曜始まりの並びを今日の位置で回転させる。 */
+     表示する7日間は今日の日付から自動計算されるため、
+     日付が変わっても手動で書き換える必要はなく、今日を起点に先7日分が自動的に表示される。 */
   var weekSchedule = [
     { name: "えりか", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
     { name: "みゆ",   days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
@@ -76,24 +75,18 @@
     var today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // 今日を含む週の月曜日を求める（日曜=0なので6日前、それ以外は月曜からの日数分戻る）
-    var mondayOffset = today.getDay() === 0 ? -6 : 1 - today.getDay();
-    var start = new Date(today);
-    start.setDate(today.getDate() + mondayOffset);
-
+    // 今日から先7日分の日付を作る
     var dates = [];
     for (var i = 0; i < 7; i++) {
-      var d = new Date(start);
-      d.setDate(start.getDate() + i);
+      var d = new Date(today);
+      d.setDate(today.getDate() + i);
       dates.push(d);
     }
 
-    // 今日が先頭に来るよう、今日のインデックスから始まる列順を作る
-    var todayIndex = today.getDay() === 0 ? 6 : today.getDay() - 1;
-    var order = [];
-    for (var o = 0; o < 7; o++) {
-      order.push((todayIndex + o) % 7);
-    }
+    // 各日付の曜日インデックス（月=0〜日=6）。person.days の参照に使う。
+    var weekdayIndexOf = function (date) {
+      return date.getDay() === 0 ? 6 : date.getDay() - 1;
+    };
 
     scheduleHeadRow.innerHTML = "";
     var nameHead = document.createElement("th");
@@ -101,11 +94,10 @@
     nameHead.textContent = "セラピスト";
     scheduleHeadRow.appendChild(nameHead);
 
-    order.forEach(function (i) {
-      var d = dates[i];
+    dates.forEach(function (d) {
       var th = document.createElement("th");
       th.scope = "col";
-      th.textContent = (d.getMonth() + 1) + "/" + d.getDate() + "(" + weekdayLabels[i] + ")";
+      th.textContent = (d.getMonth() + 1) + "/" + d.getDate() + "(" + weekdayLabels[weekdayIndexOf(d)] + ")";
       if (d.getTime() === today.getTime()) {
         th.classList.add("is-today");
       }
@@ -121,8 +113,8 @@
       nameCell.textContent = person.name;
       row.appendChild(nameCell);
 
-      order.forEach(function (i) {
-        var value = person.days[i];
+      dates.forEach(function (d) {
+        var value = person.days[weekdayIndexOf(d)];
         var cell = document.createElement("td");
         if (value === "off") {
           cell.textContent = "休み";
@@ -130,7 +122,7 @@
         } else {
           cell.textContent = value;
         }
-        if (dates[i].getTime() === today.getTime()) {
+        if (d.getTime() === today.getTime()) {
           cell.classList.add("is-today");
         }
         row.appendChild(cell);
@@ -142,8 +134,8 @@
     if (scheduleDate) {
       var end = dates[6];
       scheduleDate.textContent =
-        (start.getMonth() + 1) + "月" + start.getDate() + "日（月）〜" +
-        (end.getMonth() + 1) + "月" + end.getDate() + "日（日）の出勤情報";
+        (today.getMonth() + 1) + "月" + today.getDate() + "日（" + weekdayLabels[weekdayIndexOf(today)] + "）〜" +
+        (end.getMonth() + 1) + "月" + end.getDate() + "日（" + weekdayLabels[weekdayIndexOf(end)] + "）の出勤情報";
     }
   }
 })();
