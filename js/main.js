@@ -59,7 +59,8 @@
   /* --- 今週の出勤情報 ---
      各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
      表示する週（月曜日の日付）は今日の日付から自動計算されるため、
-     日付が変わっても手動で書き換える必要はなく、週が進むと自動的に表示も進む。 */
+     日付が変わっても手動で書き換える必要はなく、週が進むと自動的に表示も進む。
+     列の並び順は今日の日付が一番先頭に来るよう、月曜始まりの並びを今日の位置で回転させる。 */
   var weekSchedule = [
     { name: "えりか", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
     { name: "みゆ",   days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
@@ -87,13 +88,21 @@
       dates.push(d);
     }
 
+    // 今日が先頭に来るよう、今日のインデックスから始まる列順を作る
+    var todayIndex = today.getDay() === 0 ? 6 : today.getDay() - 1;
+    var order = [];
+    for (var o = 0; o < 7; o++) {
+      order.push((todayIndex + o) % 7);
+    }
+
     scheduleHeadRow.innerHTML = "";
     var nameHead = document.createElement("th");
     nameHead.scope = "col";
     nameHead.textContent = "セラピスト";
     scheduleHeadRow.appendChild(nameHead);
 
-    dates.forEach(function (d, i) {
+    order.forEach(function (i) {
+      var d = dates[i];
       var th = document.createElement("th");
       th.scope = "col";
       th.textContent = (d.getMonth() + 1) + "/" + d.getDate() + "(" + weekdayLabels[i] + ")";
@@ -112,7 +121,8 @@
       nameCell.textContent = person.name;
       row.appendChild(nameCell);
 
-      person.days.forEach(function (value, i) {
+      order.forEach(function (i) {
+        var value = person.days[i];
         var cell = document.createElement("td");
         if (value === "off") {
           cell.textContent = "休み";
