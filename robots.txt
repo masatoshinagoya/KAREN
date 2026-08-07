@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mensesthe-delivery-karen.com/sitemap.xml
