@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>送信完了｜出張専門博多メンズエステ KAREN</title>
-<meta name="description" content="ご予約・お問い合わせを受け付けました。担当より折り返しご連絡いたします。">
-<meta name="robots" content="noindex">
+<title>スケジュール｜福岡・博多の出張メンズエステ KAREN</title>
+<meta name="description" content="福岡・博多の出張メンズエステ KAREN の今週の出勤スケジュール。セラピストごとの出勤日・出勤時間をご確認いただけます。">
+<link rel="canonical" href="https://mensesthe-delivery-karen.com/schedule.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@
         <li><a href="index.html">トップ</a></li>
         <li><a href="system.html">システム</a></li>
         <li><a href="therapist.html">セラピスト</a></li>
-        <li><a href="schedule.html">スケジュール</a></li>
+        <li><a href="schedule.html" aria-current="page">スケジュール</a></li>
         <li><a href="area.html">出張エリア</a></li>
         <li><a href="contact.html" class="nav-cta">ご予約・お問い合わせ</a></li>
       </ul>
@@ -60,22 +60,49 @@
 <main id="main">
 
   <!-- ============================================================
-     THANKS
+     SCHEDULE / 今週の出勤情報（js/main.js のデータから自動生成）
   ============================================================ -->
-  <section class="thanks" aria-labelledby="thanks-heading">
-    <h1 id="thanks-heading" class="section-title">
-      <span class="section-title__en">Thank You</span>
-      送信が完了しました
+  <section class="schedule" aria-labelledby="schedule-heading">
+    <h1 id="schedule-heading" class="section-title">
+      <span class="section-title__en">Schedule</span>
+      スケジュール
     </h1>
 
-    <p class="thanks__lead">
-      ご予約・お問い合わせを受け付けました。<br>
-      内容を確認の上、担当より折り返しご連絡いたします。<br>
-      お急ぎの場合はお電話（<a href="tel:0000000000">000-0000-0000</a>／受付 10:00-24:00）でも承っております。
+    <p class="courses-preview__lead">
+      セラピストのご紹介は <a href="therapist.html">セラピスト</a> ページをご覧ください。
     </p>
 
-    <div class="thanks__buttons">
-      <a href="index.html" class="btn btn--primary">トップページへ戻る</a>
+    <p class="schedule__date" id="schedule-date"></p>
+
+    <div class="schedule__table-wrap">
+      <table class="schedule-table">
+        <caption class="visually-hidden">今週の出勤セラピストと出勤時間</caption>
+        <thead>
+          <tr id="schedule-table-head">
+            <th scope="col">セラピスト</th>
+            <th scope="col">出勤情報</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-table-body">
+          <tr><td colspan="8">出勤情報を読み込み中です…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="schedule__note">
+      出勤時間は予定です。ご予約状況により変動する場合がございますので、詳細はお電話にてご確認ください。
+    </p>
+  </section>
+
+  <!-- ============================================================
+     FINAL CTA
+  ============================================================ -->
+  <section class="final-cta" aria-label="ご予約案内">
+    <h2>ご予約・お問い合わせ</h2>
+    <p>お気軽にお問い合わせください。</p>
+    <div class="final-cta__buttons">
+      <a href="contact.html" class="btn btn--primary">予約フォームへ</a>
+      <a href="tel:0000000000" class="btn btn--outline">今すぐ電話する</a>
     </div>
   </section>
 
@@ -101,7 +128,7 @@
         <li><a href="index.html">トップ</a></li>
         <li><a href="system.html">システム</a></li>
         <li><a href="therapist.html">セラピスト</a></li>
-        <li><a href="schedule.html">スケジュール</a></li>
+        <li><a href="schedule.html" aria-current="page">スケジュール</a></li>
         <li><a href="area.html">出張エリア</a></li>
         <li><a href="contact.html">ご予約・お問い合わせ</a></li>
       </ul>

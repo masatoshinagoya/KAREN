@@ -167,12 +167,6 @@ section{
 /* ===================================================================
    Header
    =================================================================== */
-#courses-preview,
-#therapists-preview,
-#area-preview{
-  scroll-margin-top: 100px;
-}
-
 .site-header{
   position: sticky;
   top: 0;
