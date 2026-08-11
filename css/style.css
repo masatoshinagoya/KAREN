@@ -390,7 +390,7 @@ section{
 }
 
 @media (max-width: 640px){
-  .intro-banner{ max-width: 65%; }
+  .intro-banner{ max-width: 85%; margin-top: 16px; }
 }
 
 /* ===================================================================
