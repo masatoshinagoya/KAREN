@@ -364,7 +364,7 @@ section{
 .intro-banner{
   position: relative;
   max-width: 50%;
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding: 0;
 }
 .intro-banner__slides{
