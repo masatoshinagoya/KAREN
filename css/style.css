@@ -4,8 +4,7 @@
    =================================================================== */
 
 :root{
-  /* 項目名（オプション表）以外のHP全体の文字を0.8倍に縮小 */
-  font-size: 80%;
+  font-size: 100%;
 
   /* --- color --- */
   --color-paper:      #fbf8f6;   /* ページ背景（オフホワイト） */
@@ -447,7 +446,6 @@ section{
   border-bottom: 1px solid var(--color-line);
   font-size: .92rem;
 }
-/* 項目名は0.8倍縮小の対象外（元のサイズを維持） */
 .options-list li:not(.options-list__note) > span:first-child{
   font-size: 1.15rem;
 }
