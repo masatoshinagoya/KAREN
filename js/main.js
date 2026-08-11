@@ -13,20 +13,23 @@
     });
   }
 
-  /* --- ヒーロー スライドショー（フェード / インジケーター無し） --- */
-  var slides = document.querySelectorAll(".hero__slide");
+  /* --- フェードスライドショー（ヒーロー / スライドバナー共通） --- */
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var INTERVAL_MS = 6000;
 
-  if (slides.length > 1 && !reduceMotion) {
+  var initFadeSlideshow = function (slides) {
+    if (slides.length < 2 || reduceMotion) return;
+
     var current = 0;
-    var INTERVAL_MS = 6000;
-
     setInterval(function () {
       slides[current].classList.remove("is-active");
       current = (current + 1) % slides.length;
       slides[current].classList.add("is-active");
     }, INTERVAL_MS);
-  }
+  };
+
+  initFadeSlideshow(document.querySelectorAll(".hero__slide"));
+  initFadeSlideshow(document.querySelectorAll(".intro-banner__slide"));
 
   /* --- セラピストカード内 写真スライダー（1人3枚） --- */
   document.querySelectorAll("[data-photo-slider]").forEach(function (slider) {
@@ -56,25 +59,73 @@
     });
   });
 
-  /* --- 今週の出勤情報 ---
+  /* --- 出勤スケジュール共通データ ---
      各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
-     表示する7日間は今日の日付から自動計算されるため、
-     日付が変わっても手動で書き換える必要はなく、今日を起点に先7日分が自動的に表示される。 */
+     表示する日付は今日の日付から自動計算されるため、
+     日付が変わっても手動で書き換える必要はない。 */
   var weekSchedule = [
     { name: "えりか", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
     { name: "みゆ",   days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
     { name: "さくら", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
   ];
 
+  var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // 各日付の曜日インデックス（月=0〜日=6）。person.days の参照に使う。
+  var weekdayIndexOf = function (date) {
+    return date.getDay() === 0 ? 6 : date.getDay() - 1;
+  };
+
+  /* --- 本日の出勤（トップページ） --- */
+  var todayScheduleList = document.getElementById("today-schedule-list");
+  var todayScheduleDate = document.getElementById("today-schedule-date");
+
+  if (todayScheduleList) {
+    var todayIndex = weekdayIndexOf(today);
+    var workingToday = weekSchedule.filter(function (person) {
+      return person.days[todayIndex] !== "off";
+    });
+
+    todayScheduleList.innerHTML = "";
+
+    if (workingToday.length === 0) {
+      var emptyItem = document.createElement("li");
+      emptyItem.className = "today-schedule__empty";
+      emptyItem.textContent = "本日の出勤はお休みです。";
+      todayScheduleList.appendChild(emptyItem);
+    } else {
+      workingToday.forEach(function (person) {
+        var item = document.createElement("li");
+        item.className = "today-schedule__item";
+
+        var name = document.createElement("span");
+        name.className = "today-schedule__name";
+        name.textContent = person.name;
+
+        var time = document.createElement("span");
+        time.className = "today-schedule__time";
+        time.textContent = person.days[todayIndex];
+
+        item.appendChild(name);
+        item.appendChild(time);
+        todayScheduleList.appendChild(item);
+      });
+    }
+
+    if (todayScheduleDate) {
+      todayScheduleDate.textContent =
+        (today.getMonth() + 1) + "月" + today.getDate() + "日（" + weekdayLabels[todayIndex] + "）の出勤情報";
+    }
+  }
+
+  /* --- 今週の出勤情報（スケジュールページ） --- */
   var scheduleHeadRow = document.getElementById("schedule-table-head");
   var scheduleBody = document.getElementById("schedule-table-body");
   var scheduleDate = document.getElementById("schedule-date");
 
   if (scheduleHeadRow && scheduleBody) {
-    var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-
     // 今日から先7日分の日付を作る
     var dates = [];
     for (var i = 0; i < 7; i++) {
@@ -82,11 +133,6 @@
       d.setDate(today.getDate() + i);
       dates.push(d);
     }
-
-    // 各日付の曜日インデックス（月=0〜日=6）。person.days の参照に使う。
-    var weekdayIndexOf = function (date) {
-      return date.getDay() === 0 ? 6 : date.getDay() - 1;
-    };
 
     scheduleHeadRow.innerHTML = "";
     var nameHead = document.createElement("th");

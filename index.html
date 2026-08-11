@@ -124,36 +124,36 @@
   </section>
 
   <!-- ============================================================
-     STRENGTHS / 当店の強み
+     INTRO BANNER — フェード切り替え / スライドバナー
   ============================================================ -->
-  <section class="strengths" aria-labelledby="strengths-heading">
-    <h2 id="strengths-heading" class="section-title">
-      <span class="section-title__en">Our Strength</span>
-      当店が選ばれる理由
+  <section class="intro-banner" aria-label="当店のご紹介">
+    <div class="intro-banner__slides">
+
+      <figure class="intro-banner__slide is-active">
+        <img src="images/banner/introduction.png" alt="厳しい基準をクリアした「厳選」セラピストが、ご自宅やご宿泊先のホテルへ伺う「出張専門」メンズエステです。「洗練」された施術と「上質」なおもてなしで、日々の疲れとストレスを解消。忙しい大人の男性に、「最高峰」の癒やしをお届けします。">
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+     TODAY'S SCHEDULE / 本日の出勤（js/main.js のデータから自動生成）
+  ============================================================ -->
+  <section class="today-schedule" aria-labelledby="today-schedule-heading">
+    <h2 id="today-schedule-heading" class="section-title">
+      <span class="section-title__en">Today's Schedule</span>
+      本日の出勤
     </h2>
 
-    <ul class="strengths__list">
-      <li class="strengths__item">
-        <img class="strengths__icon" src="images/icons/therapist.svg" alt="">
-        <h3>厳選された日本人セラピスト</h3>
-        <p>丁寧な研修と身だしなみ基準を通過したセラピストのみが在籍。</p>
-      </li>
-      <li class="strengths__item">
-        <img class="strengths__icon" src="images/icons/hand.svg" alt="">
-        <h3>芯から解きほぐす押圧マッサージ</h3>
-        <p>全身の疲れをじっくりとケアする、丁寧な手技によるマッサージ。</p>
-      </li>
-      <li class="strengths__item">
-        <img class="strengths__icon" src="images/icons/leaf.svg" alt="">
-        <h3>極上のリンパドレナージュ</h3>
-        <p>繊細な指先でリンパの流れを促し、全身を優しくケアします。</p>
-      </li>
-      <li class="strengths__item">
-        <img class="strengths__icon" src="images/icons/feather.svg" alt="">
-        <h3>当店自慢のフェザータッチ</h3>
-        <p>羽のように優しいタッチが生み出す、これまでにない安らぎの時間。</p>
-      </li>
+    <p class="today-schedule__date" id="today-schedule-date"></p>
+
+    <ul class="today-schedule__list" id="today-schedule-list">
+      <li class="today-schedule__loading">出勤情報を読み込み中です…</li>
     </ul>
+
+    <p class="today-schedule__link">
+      <a href="schedule.html">今週の出勤スケジュールを見る</a>
+    </p>
   </section>
 
   <!-- ============================================================
