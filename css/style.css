@@ -665,7 +665,7 @@ section{
 .therapist-detail__name{
   font-size: clamp(1.9rem, 4.5vw, 2.6rem);
   letter-spacing: .04em;
-  color: var(--color-gold);
+  color: var(--color-ink);
   margin-bottom: 20px;
 }
 
