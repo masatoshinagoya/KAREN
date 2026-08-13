@@ -64,9 +64,9 @@
      表示する日付は今日の日付から自動計算されるため、
      日付が変わっても手動で書き換える必要はない。 */
   var weekSchedule = [
-    { name: "えりか", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
-    { name: "みゆ",   days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
-    { name: "さくら", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
+    { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
+    { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
+    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
   ];
 
   var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
@@ -100,6 +100,19 @@
         var item = document.createElement("li");
         item.className = "today-schedule__item";
 
+        var card = document.createElement("a");
+        card.className = "today-schedule__card";
+        card.href = person.href;
+
+        var photo = document.createElement("img");
+        photo.className = "today-schedule__photo";
+        photo.src = person.photo;
+        photo.alt = person.name;
+        card.appendChild(photo);
+
+        var info = document.createElement("span");
+        info.className = "today-schedule__info";
+
         var name = document.createElement("span");
         name.className = "today-schedule__name";
         name.textContent = person.name;
@@ -108,8 +121,11 @@
         time.className = "today-schedule__time";
         time.textContent = person.days[todayIndex];
 
-        item.appendChild(name);
-        item.appendChild(time);
+        info.appendChild(name);
+        info.appendChild(time);
+        card.appendChild(info);
+
+        item.appendChild(card);
         todayScheduleList.appendChild(item);
       });
     }

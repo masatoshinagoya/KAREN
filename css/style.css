@@ -741,13 +741,32 @@ section{
   list-style: none;
 }
 .today-schedule__item{
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
   min-width: 220px;
-  padding: 16px 24px;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
+  overflow: hidden;
+}
+.today-schedule__card{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: 14px 24px;
+  transition: background .2s ease;
+}
+.today-schedule__card:hover{ background: var(--color-rose-pale); }
+.today-schedule__photo{
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--color-line);
+}
+.today-schedule__info{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
 }
 .today-schedule__name{
   font-size: 1.14rem;
@@ -770,7 +789,7 @@ section{
 }
 
 @media (max-width: 639px){
-  .today-schedule__item{ min-width: 0; width: 100%; max-width: 320px; justify-content: space-between; }
+  .today-schedule__item{ width: 100%; max-width: 320px; }
 }
 
 /* ===================================================================
