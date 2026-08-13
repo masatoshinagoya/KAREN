@@ -608,6 +608,91 @@ section{
   .therapists-preview__list{ grid-template-columns: repeat(3, 1fr); }
 }
 
+.therapist-photo__link{ display: block; width: 100%; height: 100%; }
+
+.therapist-card__name-link:hover{ color: var(--color-rose-deep); }
+
+.therapist-card__more{
+  display: inline-block;
+  margin-top: 10px;
+  font-size: .88rem;
+  color: var(--color-rose-deep);
+  border-bottom: 1px solid transparent;
+}
+.therapist-card__more:hover{ border-color: var(--color-rose-deep); }
+
+/* ===================================================================
+   Therapist detail
+   =================================================================== */
+.therapist-detail__back{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 32px;
+  font-size: .92rem;
+  color: var(--color-ink-soft);
+  border-bottom: 1px solid transparent;
+}
+.therapist-detail__back:hover{ color: var(--color-rose-deep); border-color: var(--color-rose-deep); }
+
+.therapist-detail__inner{
+  display: grid;
+  gap: 40px;
+  text-align: left;
+}
+.therapist-detail__photo{ margin: 0 auto 32px; }
+
+.therapist-detail__catch{
+  font-size: 1.1rem;
+  color: var(--color-rose-deep);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.therapist-detail__profile{
+  font-size: .96rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 20px;
+}
+.therapist-detail__specialty{
+  border-top: 1px solid var(--color-line);
+  margin-bottom: 24px;
+}
+.therapist-detail__specialty-row{
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.therapist-detail__specialty-row dt{
+  flex: 0 0 7em;
+  color: var(--color-gold);
+  font-size: .9rem;
+  letter-spacing: .04em;
+}
+.therapist-detail__specialty-row dd{
+  margin: 0;
+  font-size: .96rem;
+}
+.therapist-detail__comment{
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: var(--color-ink-soft);
+  margin-bottom: 32px;
+}
+.therapist-detail__cta{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 760px){
+  .therapist-detail__inner{
+    grid-template-columns: 420px 1fr;
+    align-items: start;
+  }
+  .therapist-detail__photo{ margin: 0; max-width: none; }
+}
+
 /* ===================================================================
    Today's Schedule（本日の出勤／トップページ）
    =================================================================== */
