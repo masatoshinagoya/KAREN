@@ -410,6 +410,10 @@ section{
   border-radius: var(--radius);
 }
 
+@media (min-width: 760px){
+  .course-image{ max-width: 640px; }
+}
+
 .notice-box{
   max-width: 720px;
   margin: 40px auto 0;
