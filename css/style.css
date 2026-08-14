@@ -721,7 +721,11 @@ section{
 }
 
 @media (max-width: 639px){
-  .today-schedule__item{ width: 100%; max-width: 320px; }
+  .today-schedule__list{ gap: 12px; }
+  .today-schedule__item{ width: calc(50% - 6px); max-width: none; }
+  .today-schedule__info{ padding: 10px; }
+  .today-schedule__name{ font-size: 1rem; }
+  .today-schedule__time{ font-size: .84rem; }
 }
 
 /* ===================================================================
