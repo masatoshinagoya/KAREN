@@ -31,6 +31,30 @@
   initFadeSlideshow(document.querySelectorAll(".hero__slide"));
   initFadeSlideshow(document.querySelectorAll(".intro-banner__slide"));
 
+  /* --- スクロール演出（ポップイン・スライドイン） --- */
+  var animTargets = document.querySelectorAll(".c-anim-popin, .c-anim-slidein");
+
+  if (animTargets.length) {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      animTargets.forEach(function (el) {
+        el.classList.add("is-animated");
+      });
+    } else {
+      var animObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-animated");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -10% 0px" });
+
+      animTargets.forEach(function (el) {
+        animObserver.observe(el);
+      });
+    }
+  }
+
   /* --- セラピストカード内 写真スライダー（1人3枚） --- */
   document.querySelectorAll("[data-photo-slider]").forEach(function (slider) {
     var track = slider.querySelector(".therapist-photo__track");

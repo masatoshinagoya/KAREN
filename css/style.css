@@ -1062,3 +1062,61 @@ section{
 @media (min-width: 760px){
   .site-footer__inner{ grid-template-columns: 2fr 1fr 1fr; }
 }
+
+/* ===================================================================
+   c-anim-* — スクロール／読み込み時の演出（汎用コンポーネント）
+   =================================================================== */
+
+/* --- c-anim-zoomin：ヒーロー用（ページ読み込み時に発火） --- */
+@keyframes c-anim-zoomin-kf {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.c-anim-zoomin{
+  animation: c-anim-zoomin-kf .8s ease-out both;
+}
+
+/* --- c-anim-popin：見出し用（スクロールで発火） --- */
+@keyframes c-anim-popin-kf {
+  0%   { opacity: 0; transform: scale(.8); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.c-anim-popin{
+  opacity: 0;
+  transform: scale(.8);
+}
+.c-anim-popin.is-animated{
+  animation: c-anim-popin-kf .6s ease-out forwards;
+}
+
+/* --- c-anim-slidein：バナー用（スクロールで発火／既定は左から） --- */
+@keyframes c-anim-slidein-left-kf {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes c-anim-slidein-right-kf {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.c-anim-slidein{
+  opacity: 0;
+  transform: translateX(-40px);
+}
+.c-anim-slidein.is-animated{
+  animation: c-anim-slidein-left-kf .7s ease-out forwards;
+}
+.c-anim-slidein--right{ transform: translateX(40px); }
+.c-anim-slidein--right.is-animated{
+  animation: c-anim-slidein-right-kf .7s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .c-anim-zoomin,
+  .c-anim-popin,
+  .c-anim-slidein{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
