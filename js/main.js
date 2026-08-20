@@ -29,7 +29,41 @@
   };
 
   initFadeSlideshow(document.querySelectorAll(".hero__slide"));
-  initFadeSlideshow(document.querySelectorAll(".intro-banner__slide"));
+
+  /* --- イントロバナー（タップ / クリックでスライド） --- */
+  var bannerSlider = document.querySelector("[data-banner-slider]");
+  var bannerSlides = document.querySelectorAll(".intro-banner__slide");
+  var bannerDots = document.querySelectorAll("[data-banner-dots] button");
+
+  if (bannerSlider && bannerSlides.length > 1) {
+    var bannerCurrent = 0;
+
+    var goToBannerSlide = function (index) {
+      bannerCurrent = (index + bannerSlides.length) % bannerSlides.length;
+      bannerSlides.forEach(function (slide, i) {
+        slide.classList.toggle("is-active", i === bannerCurrent);
+      });
+      bannerDots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === bannerCurrent);
+      });
+    };
+
+    bannerSlider.addEventListener("click", function () {
+      goToBannerSlide(bannerCurrent + 1);
+    });
+    bannerSlider.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        goToBannerSlide(bannerCurrent + 1);
+      }
+    });
+    bannerDots.forEach(function (dot, i) {
+      dot.addEventListener("click", function (e) {
+        e.stopPropagation();
+        goToBannerSlide(i);
+      });
+    });
+  }
 
   /* --- スクロール演出（ポップイン・スライドイン） --- */
   var animTargets = document.querySelectorAll(".c-anim-popin, .c-anim-slidein");

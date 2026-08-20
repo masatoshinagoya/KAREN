@@ -124,15 +124,24 @@
   </section>
 
   <!-- ============================================================
-     INTRO BANNER — フェード切り替え / スライドバナー
+     INTRO BANNER — タップ / クリックでフェード切り替えするスライドバナー
   ============================================================ -->
   <section class="intro-banner" aria-label="当店のご紹介">
-    <div class="intro-banner__slides">
+    <div class="intro-banner__slides c-anim-slidein" data-banner-slider tabindex="0" role="button" aria-label="タップまたはクリックで次のバナーを表示">
 
       <figure class="intro-banner__slide is-active">
-        <img class="c-anim-slidein" src="images/banner/introduction.png" alt="厳しい基準をクリアした「厳選」セラピストが、ご自宅やご宿泊先のホテルへ伺う「出張専門」メンズエステです。「洗練」された施術と「上質」なおもてなしで、日々の疲れとストレスを解消。忙しい大人の男性に、「最高峰」の癒やしをお届けします。">
+        <img src="images/banner/introduction.png" alt="厳しい基準をクリアした「厳選」セラピストが、ご自宅やご宿泊先のホテルへ伺う「出張専門」メンズエステです。「洗練」された施術と「上質」なおもてなしで、日々の疲れとストレスを解消。忙しい大人の男性に、「最高峰」の癒やしをお届けします。">
       </figure>
 
+      <figure class="intro-banner__slide">
+        <img src="images/banner/campaign_open.png" alt="グランドオープン割引。当店のサービスを一度ご体感下さい。全コース対象2,000円OFF。ご予約の際は必ず「オープン割」とお伝えください。※他割引併用不可、※本指名不可">
+      </figure>
+
+    </div>
+
+    <div class="intro-banner__dots" data-banner-dots>
+      <button type="button" class="is-active" aria-label="1枚目を表示"></button>
+      <button type="button" aria-label="2枚目を表示"></button>
     </div>
   </section>
 

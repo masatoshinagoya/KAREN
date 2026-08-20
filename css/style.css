@@ -370,9 +370,14 @@ section{
 .intro-banner__slides{
   position: relative;
   width: 100%;
-  aspect-ratio: 1264 / 844;
+  aspect-ratio: 1915 / 821;
   overflow: hidden;
   background: var(--color-rose-pale);
+  cursor: pointer;
+}
+.intro-banner__slides:focus-visible{
+  outline: 2px solid var(--color-rose);
+  outline-offset: 4px;
 }
 .intro-banner__slide{
   position: absolute;
@@ -388,6 +393,21 @@ section{
   width: 100%; height: 100%;
   object-fit: contain;
 }
+.intro-banner__dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.intro-banner__dots button{
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(44,38,34,.25);
+  cursor: pointer;
+}
+.intro-banner__dots button.is-active{ background: var(--color-rose); }
 
 @media (max-width: 640px){
   .intro-banner{ max-width: 85%; margin-top: 16px; }
