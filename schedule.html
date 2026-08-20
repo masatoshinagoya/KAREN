@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>スケジュール｜福岡・博多の出張メンズエステ百花</title>
-<meta name="description" content="福岡・博多の出張メンズエステ百花の今週の出勤スケジュール。セラピストごとの出勤日・出勤時間をご確認いただけます。">
+<meta name="description" content="福岡・博多の出張メンズエステ百花の本日の出勤スケジュール。出勤セラピストと出勤時間を出勤時間の早い順にご確認いただけます。">
 <link rel="canonical" href="https://mensesthe-delivery-karen.com/schedule.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +60,7 @@
 <main id="main">
 
   <!-- ============================================================
-     SCHEDULE / 今週の出勤情報（js/main.js のデータから自動生成）
+     SCHEDULE / 本日の出勤情報（js/main.js のデータから自動生成）
   ============================================================ -->
   <section class="schedule" aria-labelledby="schedule-heading">
     <h1 id="schedule-heading" class="section-title c-anim-popin">
@@ -72,21 +72,16 @@
       セラピストのご紹介は <a href="therapist.html">セラピスト</a> ページをご覧ください。
     </p>
 
+    <div class="schedule__day-tabs-wrap">
+      <div class="schedule__day-tabs" id="schedule-day-tabs" aria-label="表示する日付を選択"></div>
+    </div>
+
     <p class="schedule__date" id="schedule-date"></p>
 
-    <div class="schedule__table-wrap">
-      <table class="schedule-table">
-        <caption class="visually-hidden">今週の出勤セラピストと出勤時間</caption>
-        <thead>
-          <tr id="schedule-table-head">
-            <th scope="col">セラピスト</th>
-            <th scope="col">出勤情報</th>
-          </tr>
-        </thead>
-        <tbody id="schedule-table-body">
-          <tr><td colspan="8">出勤情報を読み込み中です…</td></tr>
-        </tbody>
-      </table>
+    <div class="therapists-grid">
+      <ul class="therapists-preview__list" id="schedule-list">
+        <li class="schedule__loading">出勤情報を読み込み中です…</li>
+      </ul>
     </div>
 
     <p class="schedule__note">

@@ -755,7 +755,7 @@ section{
 }
 
 /* ===================================================================
-   Schedule（本日の出勤情報）
+   Schedule（本日の出勤情報／セラピストページと同じカード表示）
    =================================================================== */
 .schedule{ text-align: center; }
 .schedule__date{
@@ -764,55 +764,57 @@ section{
   margin-bottom: 24px;
   letter-spacing: .02em;
 }
-.schedule__table-wrap{
-  max-width: 920px;
-  margin: 0 auto;
+.schedule__day-tabs-wrap{
+  max-width: 720px;
+  margin: 0 auto 20px;
+  padding: 0 var(--gutter);
   overflow-x: auto;
 }
-.schedule-table{
-  width: 100%;
-  min-width: 640px;
-  border-collapse: collapse;
+.schedule__day-tabs{
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px 2px;
+}
+.schedule__day-tab{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 58px;
+  padding: 8px 10px;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
+  border-radius: 6px;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
 }
-.schedule-table th,
-.schedule-table td{
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--color-line);
-  font-size: 1.275rem;
-  text-align: center;
-  white-space: nowrap;
+.schedule__day-tab:hover{ border-color: var(--color-rose-deep); }
+.schedule__day-tab.is-active{
+  background: var(--color-rose-deep);
+  border-color: var(--color-rose-deep);
+  color: #fff;
 }
-.schedule-table tbody td{ font-size: 1.02rem; }
-.schedule-table thead th{
-  background: var(--color-rose-pale);
-  font-size: 1.14rem;
+.schedule__day-tab-date{
+  font-size: .96rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.schedule__day-tab-weekday{
+  font-size: .8rem;
   letter-spacing: .04em;
+}
+.therapist-card__time{
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--color-rose-deep);
+  letter-spacing: .02em;
+}
+.schedule__empty{
+  grid-column: 1 / -1;
+  font-size: .936rem;
   color: var(--color-ink-soft);
 }
-.schedule-table tbody th{
-  font-weight: 600;
-  text-align: left;
-}
-.schedule-table tbody td{ color: var(--color-rose-deep); }
-.schedule-table tbody tr:last-child th,
-.schedule-table tbody tr:last-child td{ border-bottom: none; }
-.schedule-table td.is-off{ color: var(--color-ink-soft); }
-.schedule-table th:first-child,
-.schedule-table tbody th{
-  position: sticky;
-  left: 0;
-  background: var(--color-surface);
-  text-align: left;
-}
-.schedule-table thead th:first-child{ background: var(--color-rose-pale); }
-.schedule-table th.is-today,
-.schedule-table td.is-today{
-  background: var(--color-rose-pale);
-  font-weight: 700;
-}
-.schedule-table tbody th.is-today{ background: var(--color-rose-pale); }
 .schedule__note{
   margin-top: 20px;
   font-size: .936rem;

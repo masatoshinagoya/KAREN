@@ -155,6 +155,12 @@
     return date.getDay() === 0 ? 6 : date.getDay() - 1;
   };
 
+  // "12:00〜22:00" のような文字列から開始時刻を分に変換する（並び替え用）。
+  var startMinutesOf = function (timeRange) {
+    var start = timeRange.split("〜")[0].split(":");
+    return parseInt(start[0], 10) * 60 + parseInt(start[1], 10);
+  };
+
   /* --- 本日の出勤（トップページ） --- */
   var todayScheduleList = document.getElementById("today-schedule-list");
   var todayScheduleDate = document.getElementById("today-schedule-date");
@@ -213,68 +219,109 @@
     }
   }
 
-  /* --- 今週の出勤情報（スケジュールページ） --- */
-  var scheduleHeadRow = document.getElementById("schedule-table-head");
-  var scheduleBody = document.getElementById("schedule-table-body");
+  /* --- 出勤情報（スケジュールページ／セラピストページと同じカード表示） ---
+     今日から7日分の日付タブを表示し、クリック／タップで選んだ日の出勤情報に切り替える。 */
+  var scheduleList = document.getElementById("schedule-list");
   var scheduleDate = document.getElementById("schedule-date");
+  var scheduleDayTabs = document.getElementById("schedule-day-tabs");
 
-  if (scheduleHeadRow && scheduleBody) {
-    // 今日から先7日分の日付を作る
-    var dates = [];
-    for (var i = 0; i < 7; i++) {
-      var d = new Date(today);
-      d.setDate(today.getDate() + i);
-      dates.push(d);
+  if (scheduleList && scheduleDayTabs) {
+    var scheduleDates = [];
+    for (var si = 0; si < 7; si++) {
+      var sd = new Date(today);
+      sd.setDate(today.getDate() + si);
+      scheduleDates.push(sd);
     }
 
-    scheduleHeadRow.innerHTML = "";
-    var nameHead = document.createElement("th");
-    nameHead.scope = "col";
-    nameHead.textContent = "セラピスト";
-    scheduleHeadRow.appendChild(nameHead);
+    var renderScheduleDay = function (dateIndex) {
+      var date = scheduleDates[dateIndex];
+      var weekdayIndex = weekdayIndexOf(date);
 
-    dates.forEach(function (d) {
-      var th = document.createElement("th");
-      th.scope = "col";
-      th.textContent = (d.getMonth() + 1) + "/" + d.getDate() + "(" + weekdayLabels[weekdayIndexOf(d)] + ")";
-      if (d.getTime() === today.getTime()) {
-        th.classList.add("is-today");
+      var workingList = weekSchedule
+        .filter(function (person) {
+          return person.days[weekdayIndex] !== "off";
+        })
+        .sort(function (a, b) {
+          return startMinutesOf(a.days[weekdayIndex]) - startMinutesOf(b.days[weekdayIndex]);
+        });
+
+      scheduleList.innerHTML = "";
+
+      if (workingList.length === 0) {
+        var emptyItem = document.createElement("li");
+        emptyItem.className = "schedule__empty";
+        emptyItem.textContent = "この日の出勤はお休みです。";
+        scheduleList.appendChild(emptyItem);
+      } else {
+        workingList.forEach(function (person) {
+          var item = document.createElement("li");
+          item.className = "therapist-card";
+
+          var photoLink = document.createElement("a");
+          photoLink.className = "therapist-card__photo";
+          photoLink.href = person.href;
+
+          var photo = document.createElement("img");
+          photo.src = person.photo;
+          photo.alt = "セラピスト " + person.name;
+          photoLink.appendChild(photo);
+          item.appendChild(photoLink);
+
+          var heading = document.createElement("h3");
+          var nameLink = document.createElement("a");
+          nameLink.className = "therapist-card__name-link";
+          nameLink.href = person.href;
+          nameLink.textContent = person.name;
+          heading.appendChild(nameLink);
+          item.appendChild(heading);
+
+          var time = document.createElement("p");
+          time.className = "therapist-card__time";
+          time.textContent = person.days[weekdayIndex];
+          item.appendChild(time);
+
+          scheduleList.appendChild(item);
+        });
       }
-      scheduleHeadRow.appendChild(th);
-    });
 
-    scheduleBody.innerHTML = "";
-    weekSchedule.forEach(function (person) {
-      var row = document.createElement("tr");
+      if (scheduleDate) {
+        scheduleDate.textContent =
+          (date.getMonth() + 1) + "月" + date.getDate() + "日（" + weekdayLabels[weekdayIndex] + "）の出勤情報";
+      }
 
-      var nameCell = document.createElement("th");
-      nameCell.scope = "row";
-      nameCell.textContent = person.name;
-      row.appendChild(nameCell);
+      scheduleDayTabs.querySelectorAll(".schedule__day-tab").forEach(function (tab, i) {
+        tab.classList.toggle("is-active", i === dateIndex);
+        tab.setAttribute("aria-pressed", String(i === dateIndex));
+      });
+    };
 
-      dates.forEach(function (d) {
-        var value = person.days[weekdayIndexOf(d)];
-        var cell = document.createElement("td");
-        if (value === "off") {
-          cell.textContent = "休み";
-          cell.classList.add("is-off");
-        } else {
-          cell.textContent = value;
-        }
-        if (d.getTime() === today.getTime()) {
-          cell.classList.add("is-today");
-        }
-        row.appendChild(cell);
+    scheduleDayTabs.innerHTML = "";
+    scheduleDates.forEach(function (date, i) {
+      var weekdayIndex = weekdayIndexOf(date);
+
+      var tab = document.createElement("button");
+      tab.type = "button";
+      tab.className = "schedule__day-tab";
+      tab.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+      if (i === 0) tab.classList.add("is-active");
+
+      var tabDate = document.createElement("span");
+      tabDate.className = "schedule__day-tab-date";
+      tabDate.textContent = (date.getMonth() + 1) + "/" + date.getDate();
+      tab.appendChild(tabDate);
+
+      var tabWeekday = document.createElement("span");
+      tabWeekday.className = "schedule__day-tab-weekday";
+      tabWeekday.textContent = weekdayLabels[weekdayIndex];
+      tab.appendChild(tabWeekday);
+
+      tab.addEventListener("click", function () {
+        renderScheduleDay(i);
       });
 
-      scheduleBody.appendChild(row);
+      scheduleDayTabs.appendChild(tab);
     });
 
-    if (scheduleDate) {
-      var end = dates[6];
-      scheduleDate.textContent =
-        (today.getMonth() + 1) + "月" + today.getDate() + "日（" + weekdayLabels[weekdayIndexOf(today)] + "）〜" +
-        (end.getMonth() + 1) + "月" + end.getDate() + "日（" + weekdayLabels[weekdayIndexOf(end)] + "）の出勤情報";
-    }
+    renderScheduleDay(0);
   }
 })();
