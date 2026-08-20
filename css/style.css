@@ -370,14 +370,19 @@ section{
 .intro-banner__slides{
   position: relative;
   width: 100%;
-  aspect-ratio: 1915 / 821;
+  aspect-ratio: 1264 / 844;
   overflow: hidden;
   background: var(--color-rose-pale);
-  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
 }
 .intro-banner__slides:focus-visible{
   outline: 2px solid var(--color-rose);
   outline-offset: 4px;
+}
+@media (hover: hover) and (pointer: fine){
+  .intro-banner__slides{ cursor: grab; }
+  .intro-banner__slides:active{ cursor: grabbing; }
 }
 .intro-banner__slide{
   position: absolute;
@@ -392,6 +397,7 @@ section{
   inset: 0;
   width: 100%; height: 100%;
   object-fit: contain;
+  -webkit-user-drag: none;
 }
 .intro-banner__dots{
   display: flex;

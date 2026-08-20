@@ -30,13 +30,17 @@
 
   initFadeSlideshow(document.querySelectorAll(".hero__slide"));
 
-  /* --- イントロバナー（タップ / クリックでスライド） --- */
+  /* --- イントロバナー（PC:ドラッグ / スマホ:タップでスライド） --- */
   var bannerSlider = document.querySelector("[data-banner-slider]");
   var bannerSlides = document.querySelectorAll(".intro-banner__slide");
   var bannerDots = document.querySelectorAll("[data-banner-dots] button");
 
   if (bannerSlider && bannerSlides.length > 1) {
     var bannerCurrent = 0;
+    var DRAG_THRESHOLD = 40;
+    var TAP_THRESHOLD = 10;
+    var pointerStartX = 0;
+    var pointerStartY = 0;
 
     var goToBannerSlide = function (index) {
       bannerCurrent = (index + bannerSlides.length) % bannerSlides.length;
@@ -48,9 +52,32 @@
       });
     };
 
-    bannerSlider.addEventListener("click", function () {
-      goToBannerSlide(bannerCurrent + 1);
+    bannerSlider.addEventListener("dragstart", function (e) {
+      e.preventDefault();
     });
+
+    bannerSlider.addEventListener("pointerdown", function (e) {
+      pointerStartX = e.clientX;
+      pointerStartY = e.clientY;
+    });
+
+    bannerSlider.addEventListener("pointerup", function (e) {
+      var deltaX = e.clientX - pointerStartX;
+      var deltaY = e.clientY - pointerStartY;
+
+      if (e.pointerType === "mouse") {
+        // PC：一定量ドラッグしたときだけスライドを切り替える
+        if (Math.abs(deltaX) >= DRAG_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+          goToBannerSlide(bannerCurrent + (deltaX < 0 ? 1 : -1));
+        }
+      } else {
+        // スマホ / タッチ：ほぼ動いていなければタップとみなす
+        if (Math.abs(deltaX) < TAP_THRESHOLD && Math.abs(deltaY) < TAP_THRESHOLD) {
+          goToBannerSlide(bannerCurrent + 1);
+        }
+      }
+    });
+
     bannerSlider.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
