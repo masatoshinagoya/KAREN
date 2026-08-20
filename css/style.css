@@ -1,5 +1,5 @@
 /* ===================================================================
-   KAREN — Base Styles
+   百花 — Base Styles
    Design tokens: 白ベース × ローズピンク × 明朝体（コーポレート明朝 ver2）
    =================================================================== */
 
@@ -190,8 +190,8 @@ section{
   align-items: center;
   gap: 10px;
 }
-.site-logo__mark{ height: 60px; width: auto; }
-.site-logo__word{ height: 48px; width: auto; }
+.site-logo__mark{ height: 48px; width: auto; }
+.site-logo__word{ height: 72px; width: auto; }
 
 .header-contact{
   margin-left: auto;
