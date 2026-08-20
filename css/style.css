@@ -190,8 +190,8 @@ section{
   align-items: center;
   gap: 10px;
 }
-.site-logo__mark{ height: 48px; width: auto; }
-.site-logo__word{ height: 72px; width: auto; }
+.site-logo__mark{ height: 40px; width: auto; }
+.site-logo__word{ height: 80px; width: auto; }
 
 .header-contact{
   margin-left: auto;
