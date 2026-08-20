@@ -30,7 +30,7 @@
 
   initFadeSlideshow(document.querySelectorAll(".hero__slide"));
 
-  /* --- イントロバナー（PC:ドラッグ / スマホ:タップでスライド） --- */
+  /* --- イントロバナー（PC:ドラッグ / スマホ:フリックでスライド） --- */
   var bannerSlider = document.querySelector("[data-banner-slider]");
   var bannerSlides = document.querySelectorAll(".intro-banner__slide");
   var bannerDots = document.querySelectorAll("[data-banner-dots] button");
@@ -38,7 +38,6 @@
   if (bannerSlider && bannerSlides.length > 1) {
     var bannerCurrent = 0;
     var DRAG_THRESHOLD = 40;
-    var TAP_THRESHOLD = 10;
     var pointerStartX = 0;
     var pointerStartY = 0;
 
@@ -65,16 +64,9 @@
       var deltaX = e.clientX - pointerStartX;
       var deltaY = e.clientY - pointerStartY;
 
-      if (e.pointerType === "mouse") {
-        // PC：一定量ドラッグしたときだけスライドを切り替える
-        if (Math.abs(deltaX) >= DRAG_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
-          goToBannerSlide(bannerCurrent + (deltaX < 0 ? 1 : -1));
-        }
-      } else {
-        // スマホ / タッチ：ほぼ動いていなければタップとみなす
-        if (Math.abs(deltaX) < TAP_THRESHOLD && Math.abs(deltaY) < TAP_THRESHOLD) {
-          goToBannerSlide(bannerCurrent + 1);
-        }
+      // PC（マウスドラッグ）・スマホ（フリック）共通：一定量動かしたときだけスライドを切り替える
+      if (Math.abs(deltaX) >= DRAG_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+        goToBannerSlide(bannerCurrent + (deltaX < 0 ? 1 : -1));
       }
     });
 
