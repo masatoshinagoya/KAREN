@@ -1045,6 +1045,175 @@ section{
 }
 
 /* ===================================================================
+   c-banner-grid — 主要導線バナー（SYSTEM/THERAPIST/LOGO/SCHEDULE/RECRUIT/CONTACT）
+   =================================================================== */
+.c-banner-grid-section{
+  max-width: none;
+  padding: 0 0 clamp(48px, 8vw, 96px);
+}
+
+.c-banner-grid{
+  display: grid;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  gap: 12px;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  grid-template-rows: 1.4fr 1fr 0.9fr;
+  grid-template-areas:
+    "system    logo    schedule"
+    "therapist logo    contact"
+    "therapist recruit contact";
+}
+
+.c-banner-grid__item--system    { grid-area: system; }
+.c-banner-grid__item--therapist { grid-area: therapist; }
+.c-banner-grid__item--logo      { grid-area: logo; }
+.c-banner-grid__item--schedule  { grid-area: schedule; }
+.c-banner-grid__item--recruit   { grid-area: recruit; }
+.c-banner-grid__item--contact   { grid-area: contact; }
+
+.c-banner-grid__item{
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-height: 220px;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-rose-pale));
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--color-ink);
+}
+a.c-banner-grid__item{ transition: box-shadow .3s ease; }
+a.c-banner-grid__item:hover,
+a.c-banner-grid__item:focus-visible{
+  box-shadow: 0 8px 24px rgba(44, 38, 34, .12);
+}
+
+/* テキストゾーン（左）と画像ゾーン（右）の分割 */
+.c-banner-grid__body{
+  position: relative;
+  z-index: 1;
+  flex: 0 0 44%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  text-align: center;
+}
+.c-banner-grid__icon{
+  width: 36px;
+  height: 36px;
+}
+.c-banner-grid__title{
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+  letter-spacing: .1em;
+  color: var(--color-rose-deep);
+}
+.c-banner-grid__rule{
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+}
+.c-banner-grid__subtitle{
+  font-size: .8rem;
+  color: var(--color-ink-soft);
+  letter-spacing: .04em;
+}
+
+.c-banner-grid__media{
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+.c-banner-grid__image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease, filter .5s ease;
+}
+.c-banner-grid__item:hover .c-banner-grid__image,
+.c-banner-grid__item:focus-visible .c-banner-grid__image{
+  transform: scale(1.06);
+  filter: brightness(.85);
+}
+
+/* 中央：ロゴブロック（装飾のみ、リンクなし） */
+.c-banner-grid__item--logo{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 32px;
+  background: linear-gradient(180deg, var(--color-surface), #fff);
+}
+.c-banner-grid__shopname{
+  width: min(85%, 360px);
+  height: auto;
+}
+.c-banner-grid__romaji{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .75rem;
+  letter-spacing: .3em;
+  color: var(--color-gold);
+}
+.c-banner-grid__romaji::before,
+.c-banner-grid__romaji::after{
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--color-gold);
+}
+.c-banner-grid__copy{
+  font-size: .85rem;
+  letter-spacing: .04em;
+  color: var(--color-ink-soft);
+}
+
+/* --- タブレット：2カラムに組み替え --- */
+@media (max-width: 1024px){
+  .c-banner-grid{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "logo      logo"
+      "system    therapist"
+      "schedule  contact"
+      "recruit   recruit";
+  }
+  .c-banner-grid__item{ min-height: 260px; }
+}
+
+/* --- スマホ：1カラムに組み替え --- */
+@media (max-width: 600px){
+  .c-banner-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "system"
+      "therapist"
+      "schedule"
+      "recruit"
+      "contact";
+  }
+  .c-banner-grid__item{
+    flex-direction: column;
+    min-height: auto;
+  }
+  .c-banner-grid__body{ flex: none; width: 100%; padding: 24px 16px; }
+  .c-banner-grid__media{ flex: none; aspect-ratio: 16 / 9; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .c-banner-grid__image{ transition: none; }
+}
+
+/* ===================================================================
    Footer
    =================================================================== */
 .site-footer{
