@@ -1058,7 +1058,7 @@ section{
   margin-inline: auto;
   padding-inline: var(--gutter);
   gap: 12px;
-  grid-template-columns: 1fr 1.3fr 1fr;
+  grid-template-columns: 1.25fr .9fr 1.25fr;
   grid-template-rows: 1.4fr 1fr 0.9fr;
   grid-template-areas:
     "system    logo    schedule"
@@ -1093,7 +1093,8 @@ a.c-banner-grid__item:focus-visible{
 .c-banner-grid__body{
   position: relative;
   z-index: 1;
-  flex: 0 0 44%;
+  flex: 0 0 62%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1102,15 +1103,21 @@ a.c-banner-grid__item:focus-visible{
   padding: 20px;
   text-align: center;
 }
+/* recruitは画像ゾーンを持たないため、bodyの横幅制限を外して全幅を使う */
+.c-banner-grid__item--recruit .c-banner-grid__body{
+  flex-basis: 100%;
+}
 .c-banner-grid__icon{
   width: 36px;
   height: 36px;
 }
 .c-banner-grid__title{
   font-family: "Shippori Mincho", serif;
-  font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
   letter-spacing: .1em;
   color: var(--color-rose-deep);
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
 .c-banner-grid__rule{
   width: 28px;
@@ -1126,7 +1133,16 @@ a.c-banner-grid__item:focus-visible{
 .c-banner-grid__media{
   position: relative;
   flex: 1;
+  align-self: center;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+}
+/* therapist/contactは2行分の縦長カードのため、4:5だと画像下に大きな余白ができる。
+   行の高さいっぱいに画像を敷くため、この2枠のみstretchに戻す */
+.c-banner-grid__item--therapist .c-banner-grid__media,
+.c-banner-grid__item--contact .c-banner-grid__media{
+  align-self: stretch;
+  aspect-ratio: auto;
 }
 .c-banner-grid__image{
   width: 100%;
