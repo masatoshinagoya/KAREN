@@ -1191,51 +1191,37 @@ a.c-banner-grid__item:focus-visible{
   color: var(--color-ink-soft);
 }
 
-/* --- 1024px以下：2カラムのタイル型に組み替え（system/therapistが左列、schedule/contactが右列） --- */
-@media (max-width: 1024px){
-  .c-banner-grid{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "logo      logo"
-      "system    schedule"
-      "therapist contact"
-      "recruit   recruit";
-  }
-  .c-banner-grid__item{
-    flex-direction: column;
-    min-height: auto;
-  }
-  .c-banner-grid__body{ flex: none; width: 100%; padding: 20px 14px; }
-  .c-banner-grid__media,
-  .c-banner-grid__item--therapist .c-banner-grid__media,
-  .c-banner-grid__item--contact .c-banner-grid__media{
-    flex: none;
-    align-self: stretch;
-    width: 100%;
-    aspect-ratio: 4 / 3;
+/* --- 900px以下：3列グリッド構造は維持したまま、タイトルの折り返しのみ防止
+   (601-1024pxの旧2カラム崩し撤去に伴い、この帯域でも英字タイトルが折り返す
+   ことを実測で確認したため、600pxではなく900pxを境に補正している) --- */
+@media (max-width: 900px){
+  .c-banner-grid__title{
+    font-size: clamp(7px, 1.8vw + 1px, 17px);
+    letter-spacing: 0;
   }
 }
 
-/* --- スマホ：カード構成は維持したまま文字・余白・比率のみ縮小 --- */
+/* --- スマホ：カード構成は維持したまま余白・アイコン・その他文字サイズのみ縮小 --- */
 @media (max-width: 600px){
-  .c-banner-grid{ gap: 10px; }
-  .c-banner-grid__media,
-  .c-banner-grid__item--therapist .c-banner-grid__media,
-  .c-banner-grid__item--contact .c-banner-grid__media{
-    aspect-ratio: 1 / 1;
-  }
-  .c-banner-grid__body{ padding: 14px 10px; gap: 6px; }
-  .c-banner-grid__icon{ width: 26px; height: 26px; }
-  .c-banner-grid__title{
-    font-size: clamp(.85rem, 4vw, 1rem);
-    letter-spacing: .05em;
-  }
-  .c-banner-grid__subtitle{ font-size: .68rem; }
-  .c-banner-grid__item--logo{ padding: 20px 16px; gap: 10px; }
-  .c-banner-grid__shopname{ width: min(70%, 220px); }
-  .c-banner-grid__romaji{ font-size: .6rem; letter-spacing: .2em; }
-  .c-banner-grid__copy{ font-size: .72rem; }
+  .c-banner-grid{ gap: 8px; }
+  .c-banner-grid__body{ padding: 12px 8px; gap: 6px; }
+  .c-banner-grid__icon{ width: 22px; height: 22px; }
+  .c-banner-grid__subtitle{ font-size: .6rem; }
+  .c-banner-grid__item--logo{ padding: 18px 12px; gap: 10px; }
+  .c-banner-grid__shopname{ width: min(80%, 220px); }
+  .c-banner-grid__romaji{ font-size: .55rem; letter-spacing: .15em; }
+  .c-banner-grid__copy{ font-size: .65rem; }
+}
+
+@media (max-width: 400px){
+  .c-banner-grid{ gap: 6px; }
+  .c-banner-grid__body{ padding: 8px 6px; }
+  .c-banner-grid__icon{ width: 18px; height: 18px; }
+  .c-banner-grid__subtitle{ font-size: .55rem; }
+  .c-banner-grid__item--logo{ padding: 14px 10px; }
+  .c-banner-grid__shopname{ width: min(75%, 180px); }
+  .c-banner-grid__romaji{ font-size: .5rem; }
+  .c-banner-grid__copy{ font-size: .6rem; }
 }
 
 @media (prefers-reduced-motion: reduce){
