@@ -1201,27 +1201,29 @@ a.c-banner-grid__item:focus-visible{
   }
 }
 
-/* --- スマホ：カード構成は維持したまま余白・アイコン・その他文字サイズのみ縮小 --- */
-@media (max-width: 600px){
-  .c-banner-grid{ gap: 8px; }
-  .c-banner-grid__body{ padding: 12px 8px; gap: 6px; }
-  .c-banner-grid__icon{ width: 22px; height: 22px; }
-  .c-banner-grid__subtitle{ font-size: .6rem; }
-  .c-banner-grid__item--logo{ padding: 18px 12px; gap: 10px; }
-  .c-banner-grid__shopname{ width: min(80%, 220px); }
-  .c-banner-grid__romaji{ font-size: .55rem; letter-spacing: .15em; }
-  .c-banner-grid__copy{ font-size: .65rem; }
-}
-
-@media (max-width: 400px){
-  .c-banner-grid{ gap: 6px; }
-  .c-banner-grid__body{ padding: 8px 6px; }
-  .c-banner-grid__icon{ width: 18px; height: 18px; }
-  .c-banner-grid__subtitle{ font-size: .55rem; }
-  .c-banner-grid__item--logo{ padding: 14px 10px; }
-  .c-banner-grid__shopname{ width: min(75%, 180px); }
-  .c-banner-grid__romaji{ font-size: .5rem; }
-  .c-banner-grid__copy{ font-size: .6rem; }
+/* --- 900px以下：行の高さを固定して縦の間延びを解消（サブタイトル/コピーは非表示） --- */
+@media (max-width: 900px){
+  .c-banner-grid{
+    gap: 6px;
+    grid-template-rows: 70px 70px 70px;
+  }
+  .c-banner-grid__item{
+    min-height: 0;
+    overflow: hidden;
+  }
+  .c-banner-grid__body{ padding: 6px; gap: 4px; }
+  .c-banner-grid__icon{ width: 16px; height: 16px; }
+  .c-banner-grid__subtitle{ display: none; }
+  .c-banner-grid__media,
+  .c-banner-grid__item--therapist .c-banner-grid__media,
+  .c-banner-grid__item--contact .c-banner-grid__media{
+    align-self: stretch;
+    aspect-ratio: auto;
+  }
+  .c-banner-grid__item--logo{ padding: 8px; gap: 4px; }
+  .c-banner-grid__shopname{ width: min(55%, 140px); }
+  .c-banner-grid__romaji{ font-size: .5rem; letter-spacing: .1em; }
+  .c-banner-grid__copy{ display: none; }
 }
 
 @media (prefers-reduced-motion: reduce){
