@@ -1357,6 +1357,7 @@ a.c-banner-grid__item:focus-visible{
     bottom: 0;
     z-index: 1000;
     height: 60px;
+    background: #fee3d7;
     box-shadow: 0 -4px 16px rgba(44, 38, 34, .18);
   }
 
@@ -1367,7 +1368,7 @@ a.c-banner-grid__item:focus-visible{
     justify-content: center;
     gap: 8px;
     padding: 10px 12px;
-    color: #fff;
+    color: var(--color-rose-deep);
     text-decoration: none;
     font-family: var(--font-serif);
     font-size: .95rem;
@@ -1375,21 +1376,12 @@ a.c-banner-grid__item:focus-visible{
     line-height: 1.2;
     -webkit-tap-highlight-color: transparent;
   }
+  .c-mobile-contact-bar__btn:active{
+    background: rgba(44, 38, 34, .06);
+  }
 
   .c-mobile-contact-bar__btn--tel{
-    background: #4caf50;
-  }
-  .c-mobile-contact-bar__btn--tel:hover,
-  .c-mobile-contact-bar__btn--tel:active{
-    background: #3d8b40;
-  }
-
-  .c-mobile-contact-bar__btn--line{
-    background: #06c755;
-  }
-  .c-mobile-contact-bar__btn--line:hover,
-  .c-mobile-contact-bar__btn--line:active{
-    background: #05a848;
+    border-right: 1px solid rgba(44, 38, 34, .12);
   }
 
   .c-mobile-contact-bar__icon{
@@ -1397,6 +1389,10 @@ a.c-banner-grid__item:focus-visible{
     height: 22px;
     flex-shrink: 0;
     fill: currentColor;
+  }
+  .c-mobile-contact-bar__icon--img{
+    fill: none;
+    object-fit: contain;
   }
 
   .c-mobile-contact-bar__label{
