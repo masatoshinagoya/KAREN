@@ -125,6 +125,19 @@
   <p class="site-footer__copyright">&copy; 百花. All Rights Reserved.</p>
 </footer>
 
+<!-- c-mobile-contact-bar: スマホ表示時のみ画面下部に固定表示（PC非表示）。
+     電話番号・LINE URLは js/main.js 冒頭の CONTACT_PHONE / LINE_URL で一括管理 -->
+<div class="c-mobile-contact-bar">
+  <a href="tel:00000000000" class="c-mobile-contact-bar__btn c-mobile-contact-bar__btn--tel" data-contact="tel">
+    <svg class="c-mobile-contact-bar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    <span class="c-mobile-contact-bar__label">電話する</span>
+  </a>
+  <a href="#" class="c-mobile-contact-bar__btn c-mobile-contact-bar__btn--line" data-contact="line" target="_blank" rel="noopener">
+    <svg class="c-mobile-contact-bar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.61 1.61 4.93 4.11 6.41-.14.9-.53 2.11-1.53 3.44a.5.5 0 0 0 .58.77c2.11-.72 3.7-1.68 4.64-2.32.7.1 1.42.16 2.2.16 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+    <span class="c-mobile-contact-bar__label">LINEで予約</span>
+  </a>
+</div>
+
 <script src="js/main.js"></script>
 </body>
 </html>

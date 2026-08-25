@@ -1,6 +1,18 @@
 (function () {
   "use strict";
 
+  /* --- 固定電話番号・LINE予約URL（本番差し替え用の設定値） ---
+     電話番号はtel:リンク用にハイフン無しの数字のみで指定する。
+     LINE_URLは公式アカウントの友だち追加/予約URLに差し替える。 */
+  var CONTACT_PHONE = "00000000000"; // TODO: 本番の電話番号に差し替え
+  var LINE_URL = "#"; // TODO: 本番のLINE予約URLに差し替え
+
+  var telLink = document.querySelector('[data-contact="tel"]');
+  if (telLink) telLink.href = "tel:" + CONTACT_PHONE;
+
+  var lineLink = document.querySelector('[data-contact="line"]');
+  if (lineLink) lineLink.href = LINE_URL;
+
   /* --- モバイルナビ開閉 --- */
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("global-nav");

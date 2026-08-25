@@ -1334,3 +1334,72 @@ a.c-banner-grid__item:focus-visible{
     transform: none !important;
   }
 }
+
+/* ===================================================================
+   c-mobile-contact-bar — スマホ専用フローティング電話/LINEバナー
+   PCでは非表示（.c-mobile-contact-bar自体をdisplay:noneにし、768px以下でのみ表示）。
+   表示中はfooterと重ならないよう、同じブレークポイントでbodyにpadding-bottomを付与する。
+   電話番号・LINE URLは js/main.js 冒頭の CONTACT_PHONE / LINE_URL で一括管理している。
+   =================================================================== */
+.c-mobile-contact-bar{
+  display: none;
+}
+
+@media (max-width: 768px){
+  body{
+    padding-bottom: 60px;
+  }
+
+  .c-mobile-contact-bar{
+    display: flex;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 60px;
+    box-shadow: 0 -4px 16px rgba(44, 38, 34, .18);
+  }
+
+  .c-mobile-contact-bar__btn{
+    display: flex;
+    flex: 1 1 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-serif);
+    font-size: .95rem;
+    letter-spacing: .04em;
+    line-height: 1.2;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .c-mobile-contact-bar__btn--tel{
+    background: #4caf50;
+  }
+  .c-mobile-contact-bar__btn--tel:hover,
+  .c-mobile-contact-bar__btn--tel:active{
+    background: #3d8b40;
+  }
+
+  .c-mobile-contact-bar__btn--line{
+    background: #06c755;
+  }
+  .c-mobile-contact-bar__btn--line:hover,
+  .c-mobile-contact-bar__btn--line:active{
+    background: #05a848;
+  }
+
+  .c-mobile-contact-bar__icon{
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  .c-mobile-contact-bar__label{
+    white-space: nowrap;
+  }
+}
