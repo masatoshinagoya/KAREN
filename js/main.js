@@ -203,6 +203,10 @@
         photo.className = "today-schedule__photo";
         photo.src = person.photo;
         photo.alt = person.name;
+        photo.onerror = function () {
+          this.onerror = null;
+          this.src = "images/therapists/no-image.png";
+        };
         card.appendChild(photo);
 
         var info = document.createElement("span");
@@ -276,6 +280,10 @@
           var photo = document.createElement("img");
           photo.src = person.photo;
           photo.alt = "セラピスト " + person.name;
+          photo.onerror = function () {
+            this.onerror = null;
+            this.src = "images/therapists/no-image.png";
+          };
           photoLink.appendChild(photo);
           item.appendChild(photoLink);
 
