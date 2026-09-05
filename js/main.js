@@ -4,7 +4,7 @@
   /* --- 固定電話番号・LINE予約URL（本番差し替え用の設定値） ---
      電話番号はtel:リンク用にハイフン無しの数字のみで指定する。
      LINE_URLは公式アカウントの友だち追加/予約URLに差し替える。 */
-  var CONTACT_PHONE = "00000000000"; // TODO: 本番の電話番号に差し替え
+  var CONTACT_PHONE = "07090965078";
   var LINE_URL = "#"; // TODO: 本番のLINE予約URLに差し替え
 
   var telLink = document.querySelector('[data-contact="tel"]');
