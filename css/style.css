@@ -1336,6 +1336,14 @@ a.c-banner-grid__item:focus-visible{
 }
 
 /* ===================================================================
+   ranking-banner — 外部エステランキングサイトへのバナーリンク
+   =================================================================== */
+.ranking-banner{
+  text-align: center;
+  padding: 0 0 clamp(48px, 8vw, 96px);
+}
+
+/* ===================================================================
    c-mobile-contact-bar — スマホ専用フローティング電話/LINEバナー
    PCでは非表示（.c-mobile-contact-bar自体をdisplay:noneにし、768px以下でのみ表示）。
    表示中はfooterと重ならないよう、同じブレークポイントでbodyにpadding-bottomを付与する。
