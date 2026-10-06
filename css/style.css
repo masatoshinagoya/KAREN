@@ -1382,20 +1382,17 @@ a.c-banner-grid__item:focus-visible{
 }
 
 /* ===================================================================
-   sns-banner — 外部メンズエステ専門SNSサイトへのバナーリンク
-   =================================================================== */
-.sns-banner{
-  text-align: center;
-  padding: 0 0 clamp(24px, 4vw, 40px);
-}
-.sns-banner img{ display: inline-block; }
-
-/* ===================================================================
-   ranking-banner — 外部エステランキングサイトへのバナーリンク
+   ranking-banner — 外部エステランキング／SNSサイトへのバナーリンク
    =================================================================== */
 .ranking-banner{
-  text-align: center;
-  padding: 0 0 clamp(48px, 8vw, 96px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter) clamp(48px, 8vw, 96px);
 }
 
 /* ===================================================================
