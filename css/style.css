@@ -755,6 +755,52 @@ section{
 }
 
 /* ===================================================================
+   News（新着情報／トップページ・一覧ページ共通）
+   =================================================================== */
+.news{ text-align: center; }
+.news__list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.news-item{
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  padding: 28px clamp(20px, 4vw, 40px);
+  text-align: left;
+}
+.news-item__date{
+  display: inline-block;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  color: var(--color-rose-deep);
+  background: var(--color-rose-pale);
+  padding: 3px 12px;
+}
+.news-item__title{
+  margin-top: 14px;
+  font-size: 1.35rem;
+  color: var(--color-ink);
+}
+.news-item__text{
+  margin-top: 12px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+.news-item__img{ margin-top: 16px; }
+.news-item__img img{
+  width: 100%;
+  border: 1px solid var(--color-line);
+}
+.news__link{
+  margin-top: 24px;
+  font-size: .936rem;
+}
+
+/* ===================================================================
    Schedule（本日の出勤情報／セラピストページと同じカード表示）
    =================================================================== */
 .schedule{ text-align: center; }
