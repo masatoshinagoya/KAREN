@@ -755,6 +755,33 @@ section{
 }
 
 /* ===================================================================
+   SNS Official Banner（公式SNSバナー／Bluesky・リラクシィ・02の3分割リンク）
+   =================================================================== */
+.sns-official{ padding-top: 0; padding-bottom: 0; }
+.sns-official__banner{
+  position: relative;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+.sns-official__banner img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.sns-official__link{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 33.3333%;
+  transition: background .2s ease;
+}
+.sns-official__link:hover,
+.sns-official__link:focus-visible{ background: rgba(255,255,255,.12); }
+.sns-official__link--bluesky{ left: 0; }
+.sns-official__link--relaxi{ left: 33.3333%; }
+.sns-official__link--02{ left: 66.6666%; }
+
+/* ===================================================================
    News（新着情報／トップページ・一覧ページ共通）
    =================================================================== */
 .news{ text-align: center; }
