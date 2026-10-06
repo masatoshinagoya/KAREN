@@ -114,3 +114,17 @@ GitHub リポジトリの Settings → Pages で `main` ブランチのルート
 1. トップページ（`index.html`）の表示確認
 2. 参考サイトのスクリーンショットを受け取り次第、余白・配色の微調整を反映
 3. コース・料金／セラピスト紹介／出張対応エリア／FAQ／お問い合わせ／特商法・利用規約 の各ページを実装
+
+## 新着情報のSNS同時投稿
+
+`scripts/post-news.mjs` で、新着情報を Bluesky・リラクシィ・02 向けの投稿文としてまとめて生成できる。
+Bluesky は AT Protocol API で自動投稿（ハッシュタグ付き）、リラクシィ・02 は外部投稿用の公開APIが
+無いため、コピペ用の投稿文を表示するだけ（リラクシィはハッシュタグ付き、02はハッシュタグなし）。
+
+```
+cp .env.example .env   # 初回のみ。BLUESKY_HANDLE / BLUESKY_APP_PASSWORD を記入
+node scripts/post-news.mjs --title "タイトル" --text "本文" [--image images/news/xxx.jpg] [--dry-run]
+```
+
+`.env` は `.gitignore` 済みで、Bluesky のログインパスワードではなく
+「設定 > アプリパスワード」で発行する投稿専用パスワードを使うこと。
