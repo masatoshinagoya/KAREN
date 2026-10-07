@@ -150,12 +150,14 @@
 
   /* --- 出勤スケジュール共通データ ---
      各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
+     age / nickname / height / bust / waist / hip / cup はトップページの本日の出勤カードに表示する。
+     cup（バストのカップ数。例: "C"）は空文字の場合は表示しない。
      表示する日付は今日の日付から自動計算されるため、
      日付が変わっても手動で書き換える必要はない。 */
   var weekSchedule = [
-    { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
-    { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
-    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
+    { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", age: 32, nickname: "丁寧な圧で、深くほぐす。", height: 160, bust: 85, waist: 58, hip: 86, cup: "C", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
+    { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", age: 27, nickname: "しなやかな手技で、巡りを整える。", height: 158, bust: 83, waist: 57, hip: 84, cup: "B", days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
+    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
   ];
 
   var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
@@ -216,11 +218,29 @@
         name.className = "today-schedule__name";
         name.textContent = person.name;
 
+        var age = document.createElement("span");
+        age.className = "today-schedule__age";
+        age.textContent = "（" + person.age + "歳）";
+        name.appendChild(age);
+
+        var nickname = document.createElement("span");
+        nickname.className = "today-schedule__nickname";
+        nickname.textContent = person.nickname;
+
+        // 例: "T160 / B85（C） W58 H86"
+        var profile = document.createElement("span");
+        profile.className = "today-schedule__profile";
+        profile.textContent =
+          "T" + person.height + " / B" + person.bust + (person.cup ? "（" + person.cup + "）" : "") +
+          " W" + person.waist + " H" + person.hip;
+
         var time = document.createElement("span");
         time.className = "today-schedule__time";
         time.textContent = person.days[todayIndex];
 
         info.appendChild(name);
+        info.appendChild(nickname);
+        info.appendChild(profile);
         info.appendChild(time);
         card.appendChild(info);
 

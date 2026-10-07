@@ -731,7 +731,22 @@ section{
   font-weight: 600;
   color: var(--color-rose-deep);
 }
+.today-schedule__age{
+  font-size: .84rem;
+  font-weight: 400;
+  color: var(--color-ink-soft);
+}
+.today-schedule__nickname{
+  font-size: .84rem;
+  color: var(--color-rose-deep);
+}
+.today-schedule__profile{
+  font-size: .84rem;
+  color: var(--color-ink-soft);
+  letter-spacing: .02em;
+}
 .today-schedule__time{
+  margin-top: 4px;
   font-size: .936rem;
   color: var(--color-ink-soft);
   letter-spacing: .02em;
@@ -752,6 +767,9 @@ section{
   .today-schedule__info{ padding: 10px; }
   .today-schedule__name{ font-size: 1rem; }
   .today-schedule__time{ font-size: .84rem; }
+  .today-schedule__age,
+  .today-schedule__nickname,
+  .today-schedule__profile{ font-size: .75rem; }
 }
 
 /* ===================================================================
