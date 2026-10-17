@@ -149,22 +149,35 @@
   });
 
   /* --- 出勤スケジュール共通データ ---
-     各セラピストの days は月曜始まり7件の繰り返しテンプレート。休みの日は "off" を指定する。
+     出勤は曜日テンプレートによる自動入力を行わず、日付ごとに手動で入力する。
+     各セラピストの shifts に "YYYY-MM-DD": "12:00〜22:00" の形式で出勤日を追加する。
+     shifts に記載のない日はお休み扱いとなり、表示されない。
+     例: shifts: { "2026-10-18": "12:00〜22:00", "2026-10-19": "14:00〜24:00" }
      age / nickname / height / bust / waist / hip / cup はトップページの本日の出勤カードに表示する。
-     cup（バストのカップ数。例: "C"）は空文字の場合は表示しない。
-     表示する日付は今日の日付から自動計算されるため、
-     日付が変わっても手動で書き換える必要はない。 */
+     cup（バストのカップ数。例: "C"）は空文字の場合は表示しない。 */
   var weekSchedule = [
-    { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", age: 32, nickname: "丁寧な圧で、深くほぐす。", height: 160, bust: 85, waist: 58, hip: 86, cup: "C", days: ["12:00〜22:00", "12:00〜22:00", "off", "14:00〜22:00", "12:00〜22:00", "12:00〜24:00", "12:00〜22:00"] },
-    { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", age: 27, nickname: "しなやかな手技で、巡りを整える。", height: 158, bust: 83, waist: 57, hip: 84, cup: "B", days: ["off", "14:00〜24:00", "14:00〜24:00", "14:00〜24:00", "off", "12:00〜22:00", "14:00〜22:00"] },
-    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", days: ["13:00〜21:00", "off", "13:00〜21:00", "13:00〜21:00", "13:00〜21:00", "off", "13:00〜21:00"] }
+    { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", age: 32, nickname: "丁寧な圧で、深くほぐす。", height: 160, bust: 85, waist: 58, hip: 86, cup: "C", shifts: { "2026-10-17": "12:00〜24:00", "2026-10-18": "12:00〜22:00", "2026-10-19": "12:00〜22:00", "2026-10-20": "12:00〜22:00", "2026-10-22": "14:00〜22:00", "2026-10-23": "12:00〜22:00" } },
+    { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", age: 27, nickname: "しなやかな手技で、巡りを整える。", height: 158, bust: 83, waist: 57, hip: 84, cup: "B", shifts: { "2026-10-17": "12:00〜22:00", "2026-10-18": "14:00〜22:00", "2026-10-20": "14:00〜24:00", "2026-10-21": "14:00〜24:00", "2026-10-22": "14:00〜24:00" } },
+    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", shifts: { "2026-10-18": "13:00〜21:00", "2026-10-19": "13:00〜21:00", "2026-10-21": "13:00〜21:00", "2026-10-22": "13:00〜21:00", "2026-10-23": "13:00〜21:00" } }
   ];
+
+  // 日付を shifts のキー（"YYYY-MM-DD"）に変換する。
+  var dateKeyOf = function (date) {
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    return date.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (d < 10 ? "0" : "") + d;
+  };
+
+  // 指定日の出勤時間を返す。出勤がない日は null。
+  var shiftOf = function (person, date) {
+    return (person.shifts && person.shifts[dateKeyOf(date)]) || null;
+  };
 
   var weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"];
   var today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // 各日付の曜日インデックス（月=0〜日=6）。person.days の参照に使う。
+  // 各日付の曜日インデックス（月=0〜日=6）。曜日ラベルの表示に使う。
   var weekdayIndexOf = function (date) {
     return date.getDay() === 0 ? 6 : date.getDay() - 1;
   };
@@ -182,7 +195,7 @@
   if (todayScheduleList) {
     var todayIndex = weekdayIndexOf(today);
     var workingToday = weekSchedule.filter(function (person) {
-      return person.days[todayIndex] !== "off";
+      return shiftOf(person, today) !== null;
     });
 
     todayScheduleList.innerHTML = "";
@@ -236,7 +249,7 @@
 
         var time = document.createElement("span");
         time.className = "today-schedule__time";
-        time.textContent = person.days[todayIndex];
+        time.textContent = shiftOf(person, today);
 
         info.appendChild(name);
         info.appendChild(nickname);
@@ -275,10 +288,10 @@
 
       var workingList = weekSchedule
         .filter(function (person) {
-          return person.days[weekdayIndex] !== "off";
+          return shiftOf(person, date) !== null;
         })
         .sort(function (a, b) {
-          return startMinutesOf(a.days[weekdayIndex]) - startMinutesOf(b.days[weekdayIndex]);
+          return startMinutesOf(shiftOf(a, date)) - startMinutesOf(shiftOf(b, date));
         });
 
       scheduleList.innerHTML = "";
@@ -317,7 +330,7 @@
 
           var time = document.createElement("p");
           time.className = "therapist-card__time";
-          time.textContent = person.days[weekdayIndex];
+          time.textContent = shiftOf(person, date);
           item.appendChild(time);
 
           scheduleList.appendChild(item);
