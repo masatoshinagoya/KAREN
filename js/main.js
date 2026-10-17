@@ -158,7 +158,8 @@
   var weekSchedule = [
     { name: "えりか", href: "therapist/01.html", photo: "images/therapists/01/1.png", age: 32, nickname: "丁寧な圧で、深くほぐす。", height: 160, bust: 85, waist: 58, hip: 86, cup: "C", shifts: { "2026-10-17": "12:00〜24:00", "2026-10-18": "12:00〜22:00", "2026-10-19": "12:00〜22:00", "2026-10-20": "12:00〜22:00", "2026-10-22": "14:00〜22:00", "2026-10-23": "12:00〜22:00" } },
     { name: "みゆ",   href: "therapist/02.html", photo: "images/therapists/02/1.png", age: 27, nickname: "しなやかな手技で、巡りを整える。", height: 158, bust: 83, waist: 57, hip: 84, cup: "B", shifts: { "2026-10-17": "12:00〜22:00", "2026-10-18": "14:00〜22:00", "2026-10-20": "14:00〜24:00", "2026-10-21": "14:00〜24:00", "2026-10-22": "14:00〜24:00" } },
-    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", shifts: { "2026-10-18": "13:00〜21:00", "2026-10-19": "13:00〜21:00", "2026-10-21": "13:00〜21:00", "2026-10-22": "13:00〜21:00", "2026-10-23": "13:00〜21:00" } }
+    { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.png", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", shifts: { "2026-10-18": "13:00〜21:00", "2026-10-19": "13:00〜21:00", "2026-10-21": "13:00〜21:00", "2026-10-22": "13:00〜21:00", "2026-10-23": "13:00〜21:00" } },
+    { name: "きこ",   href: "therapist/04.html", photo: "images/therapists/04/1.png", age: 38, nickname: "体を解し、極上鼠径部へ", height: 159, bust: 83, waist: 58, hip: 84, cup: "C", shifts: {} }
   ];
 
   // 日付を shifts のキー（"YYYY-MM-DD"）に変換する。
