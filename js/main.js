@@ -5,7 +5,7 @@
      電話番号はtel:リンク用にハイフン無しの数字のみで指定する。
      LINE_URLは公式アカウントの友だち追加/予約URLに差し替える。 */
   var CONTACT_PHONE = "07091965078";
-  var LINE_URL = "#"; // TODO: 本番のLINE予約URLに差し替え
+  var LINE_URL = "https://line.me/ti/p/NjUzpa5vcm";
 
   var telLink = document.querySelector('[data-contact="tel"]');
   if (telLink) telLink.href = "tel:" + CONTACT_PHONE;
