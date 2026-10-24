@@ -155,7 +155,7 @@
      例: shifts: { "2026-10-18": "12:00〜22:00", "2026-10-19": "14:00〜24:00" }
      age / nickname / height / bust / waist / hip / cup はトップページの本日の出勤カードに表示する。
      cup（バストのカップ数。例: "C"）は空文字の場合は表示しない。
-     配列の並び順はセラピストページ（therapist.html）の表示順に合わせる。トップページの本日の出勤はこの順で表示する。 */
+     配列の並び順はセラピストページ（therapist.html）の表示順に合わせる。出勤の表示は開始時間順で、同じ開始時間のときはこの順になる。 */
   var weekSchedule = [
     { name: "かえで", href: "therapist/06.html", photo: "images/therapists/06/1.jpg", age: 32, nickname: "気品漂う美人セラピスト", height: 156, bust: 85, waist: 57, hip: 86, cup: "E", shifts: { "2026-10-24": "14:00〜22:00", "2026-10-25": "14:00〜22:00", "2026-10-26": "15:00〜24:00" } },
     { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.jpg", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", shifts: { "2026-10-18": "13:00〜21:00", "2026-10-19": "13:00〜21:00", "2026-10-22": "15:00〜22:00" } },
@@ -198,9 +198,13 @@
 
   if (todayScheduleList) {
     var todayIndex = weekdayIndexOf(today);
-    var workingToday = weekSchedule.filter(function (person) {
-      return shiftOf(person, today) !== null;
-    });
+    var workingToday = weekSchedule
+      .filter(function (person) {
+        return shiftOf(person, today) !== null;
+      })
+      .sort(function (a, b) {
+        return startMinutesOf(shiftOf(a, today)) - startMinutesOf(shiftOf(b, today));
+      });
 
     todayScheduleList.innerHTML = "";
 
