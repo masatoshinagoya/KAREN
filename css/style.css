@@ -841,6 +841,7 @@ section{
   height: auto;
   border: 1px solid var(--color-line);
 }
+.news-item__img--original img{ width: auto; max-width: 100%; }
 .news__link{
   margin-top: 24px;
   font-size: .936rem;
