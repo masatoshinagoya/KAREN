@@ -157,6 +157,7 @@
      cup（バストのカップ数。例: "C"）は空文字の場合は表示しない。
      配列の並び順はセラピストページ（therapist.html）の表示順に合わせる。出勤の表示は開始時間順で、同じ開始時間のときはこの順になる。 */
   var weekSchedule = [
+    { name: "るな",   href: "therapist/07.html", photo: "images/therapists/07/1.jpg", age: 27, nickname: "可憐な佇まいの実力派セラピスト", height: 155, bust: 85, waist: 58, hip: 86, cup: "E", shifts: {} },
     { name: "かえで", href: "therapist/06.html", photo: "images/therapists/06/1.jpg", age: 32, nickname: "気品漂う美人セラピスト", height: 156, bust: 85, waist: 57, hip: 86, cup: "E", shifts: { "2026-10-24": "14:00〜22:00", "2026-10-25": "14:00〜22:00", "2026-10-26": "15:00〜24:00", "2026-10-29": "14:30〜23:30", "2026-11-06": "15:00〜24:00" } },
     { name: "さくら", href: "therapist/03.html", photo: "images/therapists/03/1.jpg", age: 28, nickname: "羽のような繊細タッチ。", height: 163, bust: 88, waist: 59, hip: 88, cup: "E", shifts: { "2026-10-18": "13:00〜21:00", "2026-10-19": "13:00〜21:00", "2026-10-22": "15:00〜22:00", "2026-10-27": "18:00〜23:00", "2026-10-28": "18:00〜23:00" } },
     { name: "きこ",   href: "therapist/04.html", photo: "images/therapists/04/1.png", age: 38, nickname: "体を解し、極上鼠径部へ", height: 159, bust: 83, waist: 58, hip: 84, cup: "C", shifts: { "2026-10-22": "15:00〜20:00", "2026-10-23": "11:00〜18:00", "2026-10-25": "17:00〜23:30", "2026-10-28": "18:00〜22:30", "2026-10-30": "12:00〜19:00", "2026-11-06": "12:00〜17:00" } },
